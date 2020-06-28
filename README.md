@@ -12,6 +12,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [autostart](https://dwm.suckless.org/patches/autostart/)
 - [bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 - [centeredmaster](https://dwm.suckless.org/patches/centeredmaster/)
+- [emptyview](https://dwm.suckless.org/patches/emptyview/)
 
 ## Installation
 
