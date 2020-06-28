@@ -10,6 +10,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Jump and move windows to adjacent tags
 - Real fullscreen toggle
 - Rotate windows in stack
+- Bind functions to key press or release events
 
 ## Applied Patches
 
@@ -24,6 +25,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
 - [gridmode](https://dwm.suckless.org/patches/gridmode/)
 - [rotate stack](https://dwm.suckless.org/patches/rotatestack/)
+- [keypressrelease](https://dwm.suckless.org/patches/keypressrelease/)
 
 ## Installation
 
