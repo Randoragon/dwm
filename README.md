@@ -9,6 +9,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Move and resize floating windows with keyboard shortcuts
 - Jump and move windows to adjacent tags
 - Real fullscreen toggle
+- Rotate windows in stack
 
 ## Applied Patches
 
@@ -22,6 +23,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [focus adjacent tag](https://dwm.suckless.org/patches/focusadjacenttag/)
 - [actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
 - [gridmode](https://dwm.suckless.org/patches/gridmode/)
+- [rotate stack](https://dwm.suckless.org/patches/rotatestack/)
 
 ## Installation
 
