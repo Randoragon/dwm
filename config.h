@@ -96,6 +96,7 @@ static Key keys[] = {
     { KeyPress,     MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[9]} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     { KeyPress,     MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_j,      moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_k,      moveresize,     {.v = "0x -25y 0w 0h" } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_l,      moveresize,     {.v = "25x 0y 0w 0h" } },

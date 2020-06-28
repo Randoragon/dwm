@@ -13,6 +13,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Bind functions to key press or release events
 - No border if only one window is visible
 - Snap to closest corner on mouse resize
+- Toggleable sticky windows
 
 ## Applied Patches
 
@@ -31,6 +32,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [movestack](https://dwm.suckless.org/patches/movestack/)
 - [noborder](https://dwm.suckless.org/patches/noborder/)
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
+- [sticky](https://dwm.suckless.org/patches/sticky/)
 
 ## Installation
 

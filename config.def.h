@@ -100,6 +100,7 @@ static Key keys[] = {
 	{ KeyPress,     MODKEY,                       XK_space,  setlayout,      {0} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     { KeyPress,     MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
 	{ KeyPress,     MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ KeyPress,     MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
 	{ KeyPress,     MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
