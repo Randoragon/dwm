@@ -62,7 +62,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 
 static Key keys[] = {
 	/* modifier                     key            function        argument */
-	{ MODKEY,                       XK_p,          spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_o,          spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_b,          togglebar,      {0} },
 	{ MODKEY,                       XK_j,          focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,          focusstack,     {.i = -1 } },
