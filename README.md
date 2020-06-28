@@ -11,6 +11,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Real fullscreen toggle
 - Move windows in stack or rotate the entire stack
 - Bind functions to key press or release events
+- No border if only one window is visible
 
 ## Applied Patches
 
@@ -27,6 +28,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [rotate stack](https://dwm.suckless.org/patches/rotatestack/)
 - [keypressrelease](https://dwm.suckless.org/patches/keypressrelease/)
 - [movestack](https://dwm.suckless.org/patches/movestack/)
+- [noborder](https://dwm.suckless.org/patches/noborder/)
 
 ## Installation
 
