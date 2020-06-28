@@ -1,4 +1,4 @@
-# dwm - suckless window manager
+zRdwm - suckless window manager
 
 My build of dwm, the minimalist, fast and flexible window manager with focus on productivity.
 
@@ -9,7 +9,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Move and resize floating windows with keyboard shortcuts
 - Jump and move windows to adjacent tags
 - Real fullscreen toggle
-- Rotate windows in stack
+- Move windows in stack or rotate the entire stack
 - Bind functions to key press or release events
 
 ## Applied Patches
@@ -26,6 +26,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [gridmode](https://dwm.suckless.org/patches/gridmode/)
 - [rotate stack](https://dwm.suckless.org/patches/rotatestack/)
 - [keypressrelease](https://dwm.suckless.org/patches/keypressrelease/)
+- [movestack](https://dwm.suckless.org/patches/movestack/)
 
 ## Installation
 
