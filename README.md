@@ -5,10 +5,12 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 ## Features
 
 - Running custom scripts at startup
+- New layouts
 
 ## Applied Patches
 
 - [autostart](https://dwm.suckless.org/patches/autostart/)
+- [bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 
 ## Installation
 
