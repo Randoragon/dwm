@@ -1,4 +1,4 @@
-zRdwm - suckless window manager
+# dwm - suckless window manager
 
 My build of dwm, the minimalist, fast and flexible window manager with focus on productivity.
 
@@ -12,6 +12,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Move windows in stack or rotate the entire stack
 - Bind functions to key press or release events
 - No border if only one window is visible
+- Snap to closest corner on mouse resize
 
 ## Applied Patches
 
@@ -29,6 +30,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [keypressrelease](https://dwm.suckless.org/patches/keypressrelease/)
 - [movestack](https://dwm.suckless.org/patches/movestack/)
 - [noborder](https://dwm.suckless.org/patches/noborder/)
+- [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 
 ## Installation
 
