@@ -21,6 +21,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [float border color](https://dwm.suckless.org/patches/float_border_color)
 - [focus adjacent tag](https://dwm.suckless.org/patches/focusadjacenttag/)
 - [actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
+- [gridmode](https://dwm.suckless.org/patches/gridmode/)
 
 ## Installation
 
