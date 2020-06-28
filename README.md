@@ -6,6 +6,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 
 - Running custom scripts at startup
 - New layouts
+- Move and resize floating windows with keyboard shortcuts
 
 ## Applied Patches
 
@@ -13,6 +14,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 - [centeredmaster](https://dwm.suckless.org/patches/centeredmaster/)
 - [emptyview](https://dwm.suckless.org/patches/emptyview/)
+- [moveresize](https://dwm.suckless.org/patches/moveresize/)
 
 ## Installation
 
