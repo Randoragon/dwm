@@ -37,6 +37,7 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
@@ -46,6 +47,8 @@ static const Layout layouts[] = {
 	{ "===",      bstackhoriz },
     { "|M|",      centeredmaster },
     { ">M>",      centeredfloatingmaster },
+    { "[@]",      spiral },
+    { "[\\]",      dwindle },
 };
 
 /* key definitions */
@@ -81,6 +84,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_u,          setlayout,      {.v = &layouts[5]} },
 	{ MODKEY|ShiftMask,             XK_u,          setlayout,      {.v = &layouts[6]} },
+    { MODKEY,                       XK_y,          setlayout,      {.v = &layouts[8]} },
+    { MODKEY|ShiftMask,             XK_y,          setlayout,      {.v = &layouts[7]} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_j,          moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ MODKEY|ShiftMask,             XK_k,          moveresize,     {.v = "0x -25y 0w 0h" } },
@@ -89,7 +94,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_j,          moveresize,     {.v = "0x 0y 0w 25h" } },
 	{ MODKEY|ControlMask,           XK_k,          moveresize,     {.v = "0x 0y 0w -25h" } },
 	{ MODKEY|ControlMask,           XK_l,          moveresize,     {.v = "0x 0y 25w 0h" } },
-	{ MODKEY|CtrlMask,              XK_h,          moveresize,     {.v = "0x 0y -25w 0h" } },
+	{ MODKEY|ControlMask,           XK_h,          moveresize,     {.v = "0x 0y -25w 0h" } },
 	{ MODKEY,                       XK_0,          view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,      focusmon,       {.i = -1 } },

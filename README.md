@@ -15,6 +15,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [centeredmaster](https://dwm.suckless.org/patches/centeredmaster/)
 - [emptyview](https://dwm.suckless.org/patches/emptyview/)
 - [moveresize](https://dwm.suckless.org/patches/moveresize/)
+- [fibonacci](https://dwm.suckless.org/patches/fibonacci/)
 
 ## Installation
 
