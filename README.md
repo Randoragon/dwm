@@ -11,7 +11,6 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Real fullscreen toggle
 - Move windows in stack or rotate the entire stack
 - Bind functions to key press or release events
-- No border if only one window is visible
 - Snap to closest corner on mouse resize
 - Toggleable sticky windows
 - swallow GUI child processes spawned from terminals
@@ -33,7 +32,6 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [rotate stack](https://dwm.suckless.org/patches/rotatestack/)
 - [keypressrelease](https://dwm.suckless.org/patches/keypressrelease/)
 - [movestack](https://dwm.suckless.org/patches/movestack/)
-- [noborder](https://dwm.suckless.org/patches/noborder/)
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 - [sticky](https://dwm.suckless.org/patches/sticky/)
 - [swallow](https://dwm.suckless.org/patches/swallow/)
