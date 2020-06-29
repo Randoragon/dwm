@@ -15,6 +15,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Snap to closest corner on mouse resize
 - Toggleable sticky windows
 - swallow GUI child processes spawned from terminals
+- Inner and outer gaps resizeable during runtime
 
 ## Applied Patches
 
@@ -35,6 +36,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 - [sticky](https://dwm.suckless.org/patches/sticky/)
 - [swallow](https://dwm.suckless.org/patches/swallow/)
+- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
 
 ## Installation
 

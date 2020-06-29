@@ -3,6 +3,11 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 10;       /* snap pixel */
+static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 30;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -74,61 +79,69 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 
 #include "movestack.c"
 static Key keys[] = {
-   /* type          modifier                      key        function        argument */
-	{ KeyPress,     MODKEY,                       XK_o,      spawn,          {.v = dmenucmd } },
-	{ KeyPress,     MODKEY,                       XK_b,      togglebar,      {0} },
-	{ KeyPress,     MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ KeyPress,     MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-    { KeyPress,     MODKEY|ControlMask,           XK_j,      rotatestack,    {.i = +1 } },
-    { KeyPress,     MODKEY|ControlMask,           XK_k,      rotatestack,    {.i = -1 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_equal,  incnmaster,     {.i = +1 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_minus,  incnmaster,     {.i = -1 } },
-	{ KeyPress,     MODKEY|ControlMask,           XK_h,      setmfact,       {.f = -0.05} },
-	{ KeyPress,     MODKEY|ControlMask,           XK_l,      setmfact,       {.f = +0.05} },
-	{ KeyPress,     MODKEY,                       XK_s,      zoom,           {0} },
-	{ KeyPress,     MODKEY,                       XK_Tab,    view,           {0} },
-	{ KeyPress,     MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[3]} },
-	{ KeyPress,     MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ KeyPress,     MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ KeyPress,     MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
-    { KeyPress,     MODKEY,                       XK_y,      setlayout,      {.v = &layouts[8]} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[9]} },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_j,      moveresize,     {.v = "0x 25y 0w 0h" } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_k,      moveresize,     {.v = "0x -25y 0w 0h" } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_l,      moveresize,     {.v = "25x 0y 0w 0h" } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_h,      moveresize,     {.v = "-25x 0y 0w 0h" } },
-	{ KeyPress,     MODKEY|ControlMask,           XK_j,      moveresize,     {.v = "0x 0y 0w 25h" } },
-	{ KeyPress,     MODKEY|ControlMask,           XK_k,      moveresize,     {.v = "0x 0y 0w -25h" } },
-	{ KeyPress,     MODKEY|ControlMask,           XK_l,      moveresize,     {.v = "0x 0y 25w 0h" } },
-	{ KeyPress,     MODKEY|ControlMask,           XK_h,      moveresize,     {.v = "0x 0y -25w 0h" } },
-	{ KeyPress,     MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ KeyPress,     MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ KeyPress,     MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                                      XK_1,                      0)
-	TAGKEYS(                                      XK_2,                      1)
-	TAGKEYS(                                      XK_3,                      2)
-	TAGKEYS(                                      XK_4,                      3)
-	TAGKEYS(                                      XK_5,                      4)
-	TAGKEYS(                                      XK_6,                      5)
-	TAGKEYS(                                      XK_7,                      6)
-	TAGKEYS(                                      XK_8,                      7)
-	TAGKEYS(                                      XK_9,                      8)
-    { KeyPress,     MODKEY,                       XK_h,      viewtoleft,     {0} },
-    { KeyPress,     MODKEY,                       XK_l,      viewtoright,    {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_h,      tagtoleft,      {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_l,      tagtoright,     {0} },
-	{ KeyPress,     MODKEY,                       XK_q,      killclient,     {0} },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+   /* type          modifier                      key               function        argument */
+	{ KeyPress,     MODKEY,                       XK_o,             spawn,          {.v = dmenucmd } },
+	{ KeyPress,     MODKEY,                       XK_b,             togglebar,      {0} },
+	{ KeyPress,     MODKEY,                       XK_j,             focusstack,     {.i = +1 } },
+	{ KeyPress,     MODKEY,                       XK_k,             focusstack,     {.i = -1 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_j,             movestack,      {.i = +1 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_k,             movestack,      {.i = -1 } },
+    { KeyPress,     MODKEY|ControlMask,           XK_j,             rotatestack,    {.i = +1 } },
+    { KeyPress,     MODKEY|ControlMask,           XK_k,             rotatestack,    {.i = -1 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_equal,         incnmaster,     {.i = +1 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_minus,         incnmaster,     {.i = -1 } },
+	{ KeyPress,     MODKEY|ControlMask,           XK_h,             setmfact,       {.f = -0.05} },
+	{ KeyPress,     MODKEY|ControlMask,           XK_l,             setmfact,       {.f = +0.05} },
+	{ KeyPress,     MODKEY,                       XK_s,             zoom,           {0} },
+	{ KeyPress,     MODKEY,                       XK_Tab,           view,           {0} },
+	{ KeyPress,     MODKEY,                       XK_t,             setlayout,      {.v = &layouts[0]} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_t,             setlayout,      {.v = &layouts[3]} },
+	{ KeyPress,     MODKEY,                       XK_f,             setlayout,      {.v = &layouts[1]} },
+	{ KeyPress,     MODKEY,                       XK_m,             setlayout,      {.v = &layouts[2]} },
+	{ KeyPress,     MODKEY,                       XK_u,             setlayout,      {.v = &layouts[5]} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_u,             setlayout,      {.v = &layouts[6]} },
+    { KeyPress,     MODKEY,                       XK_y,             setlayout,      {.v = &layouts[8]} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_y,             setlayout,      {.v = &layouts[9]} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_space,         togglefloating, {0} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_f,             togglefullscr,  {0} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_s,             togglesticky,   {0} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_j,             moveresize,     {.v = "0x 25y 0w 0h" } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_k,             moveresize,     {.v = "0x -25y 0w 0h" } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_l,             moveresize,     {.v = "25x 0y 0w 0h" } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_h,             moveresize,     {.v = "-25x 0y 0w 0h" } },
+	{ KeyPress,     MODKEY|ControlMask,           XK_j,             moveresize,     {.v = "0x 0y 0w 25h" } },
+	{ KeyPress,     MODKEY|ControlMask,           XK_k,             moveresize,     {.v = "0x 0y 0w -25h" } },
+	{ KeyPress,     MODKEY|ControlMask,           XK_l,             moveresize,     {.v = "0x 0y 25w 0h" } },
+	{ KeyPress,     MODKEY|ControlMask,           XK_h,             moveresize,     {.v = "0x 0y -25w 0h" } },
+	{ KeyPress,     MODKEY,                       XK_0,             view,           {.ui = ~0 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_0,             tag,            {.ui = ~0 } },
+	{ KeyPress,     MODKEY,                       XK_comma,         focusmon,       {.i = -1 } },
+	{ KeyPress,     MODKEY,                       XK_period,        focusmon,       {.i = +1 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_comma,         tagmon,         {.i = -1 } },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_period,        tagmon,         {.i = +1 } },
+	TAGKEYS(                                      XK_1,                             0)
+	TAGKEYS(                                      XK_2,                             1)
+	TAGKEYS(                                      XK_3,                             2)
+	TAGKEYS(                                      XK_4,                             3)
+	TAGKEYS(                                      XK_5,                             4)
+	TAGKEYS(                                      XK_6,                             5)
+	TAGKEYS(                                      XK_7,                             6)
+	TAGKEYS(                                      XK_8,                             7)
+	TAGKEYS(                                      XK_9,                             8)
+    { KeyPress,     MODKEY,                       XK_h,             viewtoleft,     {0} },
+    { KeyPress,     MODKEY,                       XK_l,             viewtoright,    {0} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_h,             tagtoleft,      {0} },
+    { KeyPress,     MODKEY|ShiftMask,             XK_l,             tagtoright,     {0} },
+	{ KeyPress,     MODKEY,                       XK_q,             killclient,     {0} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_q,             quit,           {0} },
+    { KeyPress,     MODKEY,                       XK_bracketright,  incrgaps,       {.i = +4 } },
+    { KeyPress,     MODKEY,                       XK_bracketleft,   incrgaps,       {.i = -4 } },
+    { KeyPress,     MODKEY|ShiftMask,             XK_bracketright,  incrogaps,      {.i = +4 } },
+    { KeyPress,     MODKEY|ShiftMask,             XK_bracketleft,   incrogaps,      {.i = -4 } },
+    { KeyPress,     MODKEY|ControlMask,           XK_bracketright,  incrigaps,      {.i = +4 } },
+    { KeyPress,     MODKEY|ControlMask,           XK_bracketleft,   incrigaps,      {.i = -4 } },
+    { KeyPress,     MODKEY|ShiftMask,             XK_0,             togglegaps,     {0} },
+    { KeyPress,     MODKEY|ControlMask,           XK_0,             defaultgaps,    {0} },
 };
 
 /* button definitions */
