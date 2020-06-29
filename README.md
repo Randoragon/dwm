@@ -14,6 +14,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - No border if only one window is visible
 - Snap to closest corner on mouse resize
 - Toggleable sticky windows
+- swallow GUI child processes spawned from terminals
 
 ## Applied Patches
 
@@ -33,6 +34,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [noborder](https://dwm.suckless.org/patches/noborder/)
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 - [sticky](https://dwm.suckless.org/patches/sticky/)
+- [swallow](https://dwm.suckless.org/patches/swallow/)
 
 ## Installation
 
