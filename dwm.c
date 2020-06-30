@@ -387,9 +387,6 @@ applyrules(Client *c)
 	if (ch.res_name)
 		XFree(ch.res_name);
     c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : (c->mon->tagset[c->mon->seltags] & ~SPTAGMASK);
-	//if(c->tags & TAGMASK)                    c->tags = c->tags & TAGMASK;
-	//else if(c->mon->tagset[c->mon->seltags]) c->mon->tagset[c->mon->seltags] & ~SPTAGMASK;
-	//else                                     c->tags = 1;
 }
 
 int
