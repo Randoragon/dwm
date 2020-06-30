@@ -11,14 +11,14 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 22;        /* 0 means that dwm will calculate bar */
+static const int user_bh            = 20;        /* 0 means that dwm will calculate bar */
 static const int startontag         = 1;        /* 0 means no tag active on start */
 static const char *fonts[]          = {
     "font awesome 5 free solid:fontformat=truetype:size=10:antialias=true;3",
     "font awesome 5 brands regular:fontformat=truetype:size=10:antialias=true;3",
     "dejavu sans:size=10:antialias=true",
 };
-static int lrpad                    = 10;       /* pixel sum of left and right padding for bar text. ~0 for auto */
+static int lrpad                    = 6;       /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char col_gray1[]       = "#050505";
 static const char col_gray2[]       = "#222222";
 static const char col_gray3[]       = "#bbbbbb";
