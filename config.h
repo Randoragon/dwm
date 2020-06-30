@@ -26,6 +26,20 @@ static const char *colors[][4]      = {
 	[SchemeSel]  = { col_gray4, col_active1, col_active1, col_active2  },
 };
 
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"st", "-n", "s_term", NULL };
+const char *spcmd2[] = {"st", "-n", "s_music", "-e", "ncmpcpp", NULL };
+const char *spcmd3[] = {"st", "-n", "s_news", "-e", "dualboat", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"s_term",      spcmd1},
+	{"s_music",     spcmd2},
+	{"s_news",      spcmd3},
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -34,11 +48,14 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ "St",      NULL,     NULL,           0,         0,          1,          -1,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
+	/* class     instance       title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "Gimp",    NULL,          NULL,           0,         1,          0,           0,        -1 },
+	{ "Firefox", NULL,          NULL,           1 << 8,    0,          0,          -1,        -1 },
+	{ "St",      NULL,          NULL,           0,         0,          1,          -1,        -1 },
+	{ NULL,      NULL,          "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
+	{ NULL,		 "s_term",		NULL,		    SPTAG(0),  1,		   0,           1,        -1 },
+	{ NULL,		 "s_music",		NULL,		    SPTAG(1),  1,		   0,           1,        -1 },
+	{ NULL,		 "s_news",		NULL,		    SPTAG(2),  1,		   0,           1,        -1 },
 };
 
 /* layout(s) */
@@ -96,14 +113,14 @@ static Key keys[] = {
 	{ KeyPress,     MODKEY,                       XK_Tab,           view,           {0} },
 	{ KeyPress,     MODKEY,                       XK_t,             setlayout,      {.v = &layouts[0]} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_t,             setlayout,      {.v = &layouts[3]} },
-	{ KeyPress,     MODKEY,                       XK_f,             setlayout,      {.v = &layouts[1]} },
-	{ KeyPress,     MODKEY,                       XK_m,             setlayout,      {.v = &layouts[2]} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_i,             setlayout,      {.v = &layouts[1]} },
+	{ KeyPress,     MODKEY,                       XK_i,             setlayout,      {.v = &layouts[2]} },
 	{ KeyPress,     MODKEY,                       XK_u,             setlayout,      {.v = &layouts[5]} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_u,             setlayout,      {.v = &layouts[6]} },
     { KeyPress,     MODKEY,                       XK_y,             setlayout,      {.v = &layouts[8]} },
     { KeyPress,     MODKEY|ShiftMask,             XK_y,             setlayout,      {.v = &layouts[9]} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_space,         togglefloating, {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_f,             togglefullscr,  {0} },
+    { KeyPress,     MODKEY,                       XK_f,             togglefullscr,  {0} },
     { KeyPress,     MODKEY|ShiftMask,             XK_s,             togglesticky,   {0} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_j,             moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_k,             moveresize,     {.v = "0x -25y 0w 0h" } },
@@ -142,6 +159,9 @@ static Key keys[] = {
     { KeyPress,     MODKEY|ControlMask,           XK_bracketleft,   incrigaps,      {.i = -4 } },
     { KeyPress,     MODKEY|ShiftMask,             XK_0,             togglegaps,     {0} },
     { KeyPress,     MODKEY|ControlMask,           XK_0,             defaultgaps,    {0} },
+	{ KeyPress,     MODKEY,            			  XK_p,  	 togglescratch,  {.ui = 0 } },
+	{ KeyPress,     MODKEY,            			  XK_m,	     togglescratch,  {.ui = 1 } },
+	{ KeyPress,     MODKEY,            			  XK_n,	     togglescratch,  {.ui = 2 } },
 };
 
 /* button definitions */

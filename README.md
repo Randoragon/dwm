@@ -16,6 +16,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - swallow GUI child processes spawned from terminals
 - Inner and outer gaps resizeable during runtime
 - Zooming swaps windows instead of shifting the whole stack
+- Unlimited scratch pads/windows (arbitrary command)
 
 ## Applied Patches
 
@@ -37,6 +38,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [swallow](https://dwm.suckless.org/patches/swallow/)
 - [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
+- [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
 
 ## Installation
 
