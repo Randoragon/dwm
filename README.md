@@ -27,7 +27,6 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [emptyview](https://dwm.suckless.org/patches/emptyview/)
 - [moveresize](https://dwm.suckless.org/patches/moveresize/)
 - [fibonacci](https://dwm.suckless.org/patches/fibonacci/)
-- [float border color](https://dwm.suckless.org/patches/float_border_color)
 - [focus adjacent tag](https://dwm.suckless.org/patches/focusadjacenttag/)
 - [actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
 - [gridmode](https://dwm.suckless.org/patches/gridmode/)
