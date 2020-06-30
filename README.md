@@ -17,6 +17,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Inner and outer gaps resizeable during runtime
 - Zooming swaps windows instead of shifting the whole stack
 - Unlimited scratch pads/windows (arbitrary command)
+- Execute arbitrary commands by sending signals
 
 ## Applied Patches
 
@@ -39,6 +40,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
 - [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
+- [fsignal](https://dwm.suckless.org/patches/fsignal/)
 
 ## Installation
 

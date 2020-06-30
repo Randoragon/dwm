@@ -26,6 +26,7 @@ static const char *colors[][4]      = {
 	[SchemeSel]  = { col_gray4, col_active1, col_active1, col_active2  },
 };
 
+/* scratchpads */
 typedef struct {
 	const char *name;
 	const void *cmd;
@@ -38,6 +39,12 @@ static Sp scratchpads[] = {
 	{"s_term",      spcmd1},
 	{"s_music",     spcmd2},
 	{"s_news",      spcmd3},
+};
+
+/* signals */
+static Signal signals[] = {
+	/* signum               function        argument*/
+	{ 15,                   quit,           {0} },
 };
 
 /* tagging */
@@ -93,6 +100,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_active2, "-sf", col_gray4, NULL };
+static const char *quitcmd[] = { "quitmenu", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
@@ -131,7 +139,6 @@ static Key keys[] = {
 	{ KeyPress,     MODKEY|ControlMask,           XK_l,             moveresize,     {.v = "0x 0y 25w 0h" } },
 	{ KeyPress,     MODKEY|ControlMask,           XK_h,             moveresize,     {.v = "0x 0y -25w 0h" } },
 	{ KeyPress,     MODKEY,                       XK_0,             view,           {.ui = ~0 } },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_0,             tag,            {.ui = ~0 } },
 	{ KeyPress,     MODKEY,                       XK_comma,         focusmon,       {.i = -1 } },
 	{ KeyPress,     MODKEY,                       XK_period,        focusmon,       {.i = +1 } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_comma,         tagmon,         {.i = -1 } },
@@ -150,7 +157,7 @@ static Key keys[] = {
     { KeyPress,     MODKEY|ShiftMask,             XK_h,             tagtoleft,      {0} },
     { KeyPress,     MODKEY|ShiftMask,             XK_l,             tagtoright,     {0} },
 	{ KeyPress,     MODKEY,                       XK_q,             killclient,     {0} },
-	{ KeyPress,     MODKEY|ShiftMask,             XK_q,             quit,           {0} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_q,             spawn,          {.v = quitcmd} },
     { KeyPress,     MODKEY,                       XK_bracketright,  incrgaps,       {.i = +4 } },
     { KeyPress,     MODKEY,                       XK_bracketleft,   incrgaps,       {.i = -4 } },
     { KeyPress,     MODKEY|ShiftMask,             XK_bracketright,  incrogaps,      {.i = +4 } },
