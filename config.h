@@ -12,7 +12,11 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int startontag         = 1;        /* 0 means no tag active on start */
-static const char *fonts[]          = { "dejavu sans:size=10:antialias=true" };
+static const char *fonts[]          = {
+    "font awesome 5 free solid:fontformat=truetype:size=10:antialias=true;3",
+    "font awesome 5 brands regular:fontformat=truetype:size=10:antialias=true;3",
+    "dejavu sans:size=10:antialias=true",
+};
 static const char col_gray1[]       = "#050505";
 static const char col_gray2[]       = "#222222";
 static const char col_gray3[]       = "#bbbbbb";
@@ -33,10 +37,10 @@ const char *spcmd1[] = {"st", "-g", "155x50", "-n", "s_term", NULL };
 const char *spcmd2[] = {"st", "-g", "155x50", "-n", "s_music", "-e", "ncmpcpp", NULL };
 const char *spcmd3[] = {"st", "-g", "155x50", "-n", "s_news", "-e", "dualboat", NULL };
 static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"s_term",      spcmd1},
-	{"s_music",     spcmd2},
-	{"s_news",      spcmd3},
+	/* name           cmd  */
+	{"s_term",        spcmd1},
+	{"s_music",       spcmd2},
+	{"s_news",        spcmd3},
 };
 
 /* signals */
@@ -46,22 +50,24 @@ static Signal signals[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance       title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,          NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox", NULL,          NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ "St",      NULL,          NULL,           0,         0,          1,          -1,        -1 },
-	{ NULL,      NULL,          "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
-	{ NULL,		 "s_term",		NULL,		    SPTAG(0),  1,		   0,           1,        -1 },
-	{ NULL,		 "s_music",		NULL,		    SPTAG(1),  1,		   0,           1,        -1 },
-	{ NULL,		 "s_news",		NULL,		    SPTAG(2),  1,		   0,           1,        -1 },
-    { "floatme", NULL,          NULL,           0,         1,          0,           0,        -1 }
+	/* class         instance       title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "Gimp",        NULL,          NULL,           0,         1,          0,           0,        -1 },
+	{ "St",          NULL,          NULL,           0,         0,          1,          -1,        -1 },
+	{ NULL,          NULL,          "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
+	{ NULL,		     "s_term",		NULL,		    SPTAG(0),  1,		   1,           1,        -1 },
+	{ NULL,		     "s_music",		NULL,		    SPTAG(1),  1,		   0,           1,        -1 },
+	{ NULL,		     "s_news",		NULL,		    SPTAG(2),  1,		   1,           1,        -1 },
+    { "floatme",     NULL,          NULL,           0,         1,          0,           0,        -1 },
+	{ "firefox",     NULL,          NULL,           1 << 0,    0,          0,           0,        -1 },
+	{ "Thunderbird", NULL,          NULL,           1 << 1,    0,          0,           0,        -1 },
+	{ "discord",     NULL,          NULL,           1 << 2,    0,          0,           0,        -1 },
 };
 
 /* layout(s) */
@@ -147,15 +153,18 @@ static Key keys[] = {
 	{ KeyPress,     MODKEY,                       XK_period,        focusmon,       {.i = +1 } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_comma,         tagmon,         {.i = -1 } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_period,        tagmon,         {.i = +1 } },
-	TAGKEYS(                                      XK_1,                             0)
-	TAGKEYS(                                      XK_2,                             1)
-	TAGKEYS(                                      XK_3,                             2)
-	TAGKEYS(                                      XK_4,                             3)
-	TAGKEYS(                                      XK_5,                             4)
-	TAGKEYS(                                      XK_6,                             5)
-	TAGKEYS(                                      XK_7,                             6)
-	TAGKEYS(                                      XK_8,                             7)
-	TAGKEYS(                                      XK_9,                             8)
+	TAGKEYS(                                      XK_w,                             0)
+	TAGKEYS(                                      XK_e,                             1)
+	TAGKEYS(                                      XK_d,                             2)
+	TAGKEYS(                                      XK_1,                             3)
+	TAGKEYS(                                      XK_2,                             4)
+	TAGKEYS(                                      XK_3,                             5)
+	TAGKEYS(                                      XK_4,                             6)
+	TAGKEYS(                                      XK_5,                             7)
+	TAGKEYS(                                      XK_6,                             8)
+	TAGKEYS(                                      XK_7,                             9)
+	TAGKEYS(                                      XK_8,                            10)
+	TAGKEYS(                                      XK_9,                            11)
     { KeyPress,     MODKEY,                       XK_h,             viewtoleft,     {0} },
     { KeyPress,     MODKEY,                       XK_l,             viewtoright,    {0} },
     { KeyPress,     MODKEY|ShiftMask,             XK_h,             tagtoleft,      {0} },
