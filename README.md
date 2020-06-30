@@ -27,6 +27,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - custom foreground and background colors
 - customizable bar text horizontal padding
 - custom bar height
+- window name is centered between tags and status text
 
 ## Applied Patches
 
