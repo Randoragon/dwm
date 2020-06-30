@@ -26,6 +26,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - only occupied tags are visible
 - custom foreground and background colors
 - customizable bar text horizontal padding
+- custom bar height
 
 ## Applied Patches
 
@@ -52,6 +53,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [alpha](https://dwm.suckless.org/patches/alpha/)
 - [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
+- [bar height](https://dwm.suckless.org/patches/bar_height/)
 
 ## Installation
 
