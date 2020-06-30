@@ -17,6 +17,7 @@ static const char *fonts[]          = {
     "font awesome 5 brands regular:fontformat=truetype:size=10:antialias=true;3",
     "dejavu sans:size=10:antialias=true",
 };
+static int lrpad                    = 10;       /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char col_gray1[]       = "#050505";
 static const char col_gray2[]       = "#222222";
 static const char col_gray3[]       = "#bbbbbb";

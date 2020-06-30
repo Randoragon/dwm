@@ -13,6 +13,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int startontag         = 1;        /* 0 means no tag active on start */
 static const char *fonts[]          = { "monospace:size=10" };
+static int lrpad                    = 2;        /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
