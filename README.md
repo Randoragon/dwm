@@ -23,6 +23,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 ## Bar features
 
 - transparency
+- only occupied tags are visible
 
 ## Applied Patches
 
@@ -47,6 +48,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [fsignal](https://dwm.suckless.org/patches/fsignal/)
 - [moveplace](https://dwm.suckless.org/patches/moveplace/) (modified)
 - [alpha](https://dwm.suckless.org/patches/alpha/)
+- [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
 
 ## Installation
 
