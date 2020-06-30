@@ -21,18 +21,29 @@ static const char col_gray1[]       = "#050505";
 static const char col_gray2[]       = "#222222";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#dfdfdf";
-static const char col_active1[]      = "#ffb52a";
+static const char col_yellow1[]     = "#ffb52a";
+static const char col_cyan[]        = "#005577";
 static const unsigned int baralpha = 200;
 static const unsigned int borderalpha = OPAQUE;
-static const char *colors[][4]      = {
-	/*               fg         bg           border    */ 
-	[SchemeNorm] = { col_gray3, col_gray1,   col_gray2   },
-	[SchemeSel]  = { col_gray4, col_active1, col_active1 },
+static const char *colors[][3]      = {
+	/*                   fg            bg            border     */
+	[SchemeNorm]     = { col_gray1,    col_gray1,    col_gray2   },
+	[SchemeSel]      = { col_gray1,    col_yellow1,  col_yellow1 },
+	[SchemeStatus]   = { col_gray3,    col_gray1,    "#000000"   }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray1,    col_yellow1,  "#000000"   }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm] = { col_gray4,    col_gray1,    "#000000"   }, // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { col_gray4,    col_gray1,    "#000000"   }, // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm] = { col_gray4,    col_gray1,    "#000000"   }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	/*                   fg      bg        border     */
+	[SchemeNorm]     = { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]      = { OPAQUE, baralpha, borderalpha },
+	[SchemeStatus]   = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsNorm] = { OPAQUE, baralpha, borderalpha },
+	[SchemeInfoSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeInfoNorm] = { OPAQUE, baralpha, borderalpha },
 };
 
 /* scratchpads */
