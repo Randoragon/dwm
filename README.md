@@ -18,6 +18,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Zooming swaps windows instead of shifting the whole stack
 - Unlimited scratch pads/windows (arbitrary command)
 - Execute arbitrary commands by sending signals
+- "throw" windows against screen borders
 
 ## Applied Patches
 
@@ -40,6 +41,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
 - [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
 - [fsignal](https://dwm.suckless.org/patches/fsignal/)
+- [moveplace](https://dwm.suckless.org/patches/moveplace/) (modified)
 
 ## Installation
 
