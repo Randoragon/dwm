@@ -25,6 +25,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - transparency
 - only occupied tags are visible
 - custom foreground and background colors
+- customizable bar text horizontal padding
 
 ## Applied Patches
 
