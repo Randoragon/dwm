@@ -16,7 +16,7 @@ static const int startontag         = 1 << 3;   /* 0 means no tag active on star
 static const char *fonts[]          = {
     "font awesome 5 free solid:fontformat=truetype:size=10:antialias=true;3",
     "font awesome 5 brands regular:fontformat=truetype:size=10:antialias=true;3",
-    "dejavu sans:size=10:antialias=true",
+    "dejavu sans:size=9:antialias=true",
 };
 static int lrpad                    = 6;       /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char col_gray1[]       = "#050505";
