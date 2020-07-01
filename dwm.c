@@ -2220,10 +2220,6 @@ tile(Monitor *m)
 	if (n == 0)
 		return;
 
-	if (smartgaps == n) {
-		oe = 0; // outer gaps disabled
-	}
-
 	if (n > m->nmaster)
 		mw = m->nmaster ? (m->ww + m->gappi*ie) * m->mfact : 0;
 	else
