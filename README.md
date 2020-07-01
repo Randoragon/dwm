@@ -49,7 +49,7 @@ but there are also many small changes and tweaks I've done manually, so this bui
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 - [sticky](https://dwm.suckless.org/patches/sticky/)
 - [swallow](https://dwm.suckless.org/patches/swallow/)
-- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
+- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/) (modified)
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
 - [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
 - [fsignal](https://dwm.suckless.org/patches/fsignal/)
