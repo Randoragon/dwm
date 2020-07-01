@@ -30,11 +30,11 @@ static const unsigned int baralpha = 200;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*                   fg            bg            border     */
-	[SchemeNorm]     = { col_gray1,    col_gray1,    col_gray2   },
-	[SchemeSel]      = { col_gray1,    col_yellow1,  col_yellow1 },
+	[SchemeNorm]     = { "#000000",    "#000000",    col_gray2   }, // Only border is important
+	[SchemeSel]      = { "#000000",    col_yellow1,  col_yellow1 }, // Only border is important, but bg holds color for tag underline rectangle
 	[SchemeStatus]   = { col_gray3,    col_gray1,    "#000000"   }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_gray1,    col_yellow1,  "#000000"   }, // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm] = { col_gray4,    col_gray2,    "#000000"   }, // Tagbar left unselected {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4,    col_gray2,    "#000000"   }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm] = { col_gray4,    col_gray1,    "#000000"   }, // Tagbar left unselected {text,background,not used but cannot be empty}
     [SchemeTagsUrg]  = { col_gray4,    col_red,      "#000000"   }, // Tagbar left urgent {text,background,not used but cannot be empty}
     [SchemeInfoSel]  = { col_yellow2,  col_gray1,    "#000000"   }, // infobar middle  selected {text,background,not used but cannot be empty}
     [SchemeInfoNorm] = { col_yellow2,  col_gray1,    "#000000"   }, // infobar middle  unselected {text,background,not used but cannot be empty}
