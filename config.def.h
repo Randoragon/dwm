@@ -35,9 +35,15 @@ static const char *colors[][3]      = {
     [SchemeInfoNorm] = { col_gray3, col_gray1, "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	/*                   fg      bg        border     */
+	[SchemeNorm]     = { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]      = { OPAQUE, baralpha, borderalpha },
+	[SchemeStatus]   = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsNorm] = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsUrg]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeInfoSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeInfoNorm] = { OPAQUE, baralpha, borderalpha },
 };
 
 typedef struct {
