@@ -57,7 +57,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [bar height](https://dwm.suckless.org/patches/bar_height/)
 - [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
-- [floatrules](https://dwm.suckless.org/patches/floatrules/)
+- [floatrules](https://dwm.suckless.org/patches/floatrules/) (modified)
 
 ## Installation
 
