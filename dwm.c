@@ -102,6 +102,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, canfocus, isurgent, neverfocus, oldstate, isfullscreen, issticky, isterminal, noswallow;
+    int floatborderpx;
     pid_t pid;
 	Client *next;
 	Client *snext;
@@ -164,6 +165,7 @@ typedef struct {
 	int isterminal;
 	int noswallow;
 	int monitor;
+    int floatx, floaty, floatw, floath, floatborderpx;
 } Rule;
 
 /* function declarations */
@@ -374,10 +376,13 @@ applyrules(Client *c)
 			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
             c->canfocus   = r->canfocus;
+            c->floatborderpx = r->floatborderpx;
 			c->tags |= r->tags;
 			if ((r->tags & SPTAGMASK) && r->isfloating) {
-				c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
-				c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+				c->x = r->floatx == -1 ? c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2) : r->floatx;
+				c->y = r->floaty == -1 ? c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2) : r->floaty;
+                c->w = r->floatw == -1 ? c->w : r->floatw;
+                c->h = r->floath == -1 ? c->h : r->floath;
 			}
 
 			for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -1272,8 +1277,7 @@ manage(Window w, XWindowAttributes *wa)
 		c->y = c->mon->my + c->mon->mh - HEIGHT(c);
 	c->x = MAX(c->x, c->mon->mx);
 	/* only fix client y-offset, if the client center might cover the bar */
-	c->y = MAX(c->y, ((c->mon->by == c->mon->my) && (c->x + (c->w / 2) >= c->mon->wx)
-		&& (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
+	c->y = MAX(c->y, c->mon->my);
 	c->bw = borderpx;
 
 	wc.border_width = c->bw;
@@ -1614,7 +1618,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	c->oldy = c->y; c->y = wc.y = y;
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
-	wc.border_width = c->bw;
+	wc.border_width = (c->isfloating && c->floatborderpx != -1) ? c->floatborderpx : c->bw;
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);
