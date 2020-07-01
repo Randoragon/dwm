@@ -1338,6 +1338,8 @@ void
 monocle(Monitor *m)
 {
 	unsigned int n = 0;
+    unsigned int gi = m->gappi * enablegaps;
+    unsigned int go = m->gappo * enablegaps;
 	Client *c;
 
 	for (c = m->clients; c; c = c->next)
@@ -1346,7 +1348,7 @@ monocle(Monitor *m)
 	if (n > 0) /* override layout symbol */
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+		resize(c, m->wx + go, m->wy + go, m->ww - 2*c->bw - 2*go, m->wh - 2*c->bw - 2*go, 0);
 }
 
 void
@@ -2213,7 +2215,9 @@ tagmon(const Arg *arg)
 void
 tile(Monitor *m)
 {
-	unsigned int i, n, h, r, oe = enablegaps, ie = enablegaps, mw, my, ty;
+	unsigned int i, n, h, r, mw, my, ty;
+    unsigned int gi = m->gappi * enablegaps;
+    unsigned int go = m->gappo * enablegaps;
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
@@ -2221,20 +2225,20 @@ tile(Monitor *m)
 		return;
 
 	if (n > m->nmaster)
-		mw = m->nmaster ? (m->ww + m->gappi*ie) * m->mfact : 0;
+		mw = m->nmaster ? (m->ww + gi) * m->mfact : 0;
 	else
-		mw = m->ww - 2*m->gappo*oe + m->gappi*ie;
-	for (i = 0, my = ty = m->gappo*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		mw = m->ww - 2*go + gi;
+	for (i = 0, my = ty = go, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
 			r = MIN(n, m->nmaster) - i;
-			h = (m->wh - my - m->gappo*oe - m->gappi*ie * (r - 1)) / r;
-			resize(c, m->wx + m->gappo*oe, m->wy + my, mw - (2*c->bw) - m->gappi*ie, h - (2*c->bw), 0);
-			my += HEIGHT(c) + m->gappi*ie;
+			h = (m->wh - my - go - gi * (r - 1)) / r;
+			resize(c, m->wx + go, m->wy + my, mw - (2*c->bw) - gi, h - (2*c->bw), 0);
+			my += HEIGHT(c) + gi;
 		} else {
 			r = n - i;
-			h = (m->wh - ty - m->gappo*oe - m->gappi*ie * (r - 1)) / r;
-			resize(c, m->wx + mw + m->gappo*oe, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappo*oe, h - (2*c->bw), 0);
-			ty += HEIGHT(c) + m->gappi*ie;
+			h = (m->wh - ty - go - gi * (r - 1)) / r;
+			resize(c, m->wx + mw + go, m->wy + ty, m->ww - mw - (2*c->bw) - 2*go, h - (2*c->bw), 0);
+			ty += HEIGHT(c) + gi;
 		}
 }
 
