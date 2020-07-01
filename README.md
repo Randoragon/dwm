@@ -19,6 +19,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - Unlimited scratch pads/windows (arbitrary command)
 - Execute arbitrary commands by sending signals
 - "throw" windows against screen borders
+- window rules: canfocus
 
 ## Bar features
 
@@ -55,6 +56,7 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 - [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [bar height](https://dwm.suckless.org/patches/bar_height/)
+- [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
 
 ## Installation
 
