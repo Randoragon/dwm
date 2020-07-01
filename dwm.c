@@ -861,11 +861,17 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
+    /* we want all tags to have equal width, so we use the widest one as reference */
+    w = 0;
+    for (i = 0; i < LENGTH(tags); i++) {
+        w = TEXTW(tags[i]) > w ? TEXTW(tags[i]) : w;
+    }
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
-		w = TEXTW(tags[i]);
+        int toffset; /* since tags are wider than text within, calculate the offset so text is centered */
+        toffset = (w - TEXTW(tags[i]) + lrpad) / 2;
         drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeTagsSel : (urg & 1 << i ? SchemeTagsUrg : SchemeTagsNorm)]);
-		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], 0);
+		drw_text(drw, x, 0, w, bh, toffset, tags[i], 0);
 		if (occ & 1 << i) {
 			drw_rect(drw, x + boxs, boxs, boxw, boxw, 1, 1);
             drw_rect(drw, x + boxs, boxs, boxw, boxw, (m == selmon && selmon->sel && selmon->sel->tags & 1 << i), 0);
