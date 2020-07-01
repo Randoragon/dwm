@@ -2,6 +2,9 @@
 
 My build of dwm, the minimalist, fast and flexible window manager with focus on productivity.
 
+The majority of added code comes from applying various patches from the [suckless website](https://dwm.suckless.org),
+but there are also many small changes and tweaks I've done manually, so this build is quite unique to my taste.
+
 ## Main features
 
 - Running custom scripts at startup
