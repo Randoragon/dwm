@@ -8,7 +8,7 @@ but there are also many small changes and tweaks I've done manually, so this bui
 ## Main features
 
 - Running custom scripts at startup
-- New layouts
+- New layouts: bstack, centeredmaster, floatingcenteredmaster, fibonacci dwindle, grid
 - Move and resize floating windows with keyboard shortcuts
 - Jump and move windows to adjacent tags
 - Real fullscreen toggle
@@ -17,7 +17,7 @@ but there are also many small changes and tweaks I've done manually, so this bui
 - Snap to closest corner on mouse resize
 - Toggleable sticky windows
 - swallow GUI child processes spawned from terminals
-- Inner and outer gaps resizeable during runtime
+- Inner and outer gaps resizeable during runtime (compatible with all layouts)
 - Zooming swaps windows instead of shifting the whole stack
 - Unlimited scratch pads/windows (arbitrary command)
 - Execute arbitrary commands by sending signals
