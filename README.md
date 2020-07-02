@@ -5,6 +5,9 @@ My build of dwm, the minimalist, fast and flexible window manager with focus on 
 The majority of added code comes from applying various patches from the [suckless website](https://dwm.suckless.org),
 but there are also many small changes and tweaks I've done manually, so this build is quite unique to my taste.
 
+Also check out [my dwmblocks build](https://github.com/randoragon/dwmblocks) for examples on how to
+utilize some bar patches' features.
+
 ## Main features
 
 - Running custom scripts at startup
@@ -26,6 +29,7 @@ but there are also many small changes and tweaks I've done manually, so this bui
 
 ## Bar features
 
+- draw rectangles and customize colors
 - transparency
 - custom foreground and background colors
 - customizable bar text horizontal padding
@@ -62,6 +66,7 @@ so a lot of the code is slightly different from its original source.
 - [bar height](https://dwm.suckless.org/patches/bar_height/)
 - [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
+- [status2d](https://dwm.suckless.org/patches/status2d/)
 
 ## Installation
 
