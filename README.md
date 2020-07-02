@@ -34,6 +34,9 @@ but there are also many small changes and tweaks I've done manually, so this bui
 
 ## Applied Patches
 
+Often times the patches were tinkered with after having been applied,
+so a lot of the code is slightly different from its original source.
+
 - [autostart](https://dwm.suckless.org/patches/autostart/)
 - [bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 - [centeredmaster](https://dwm.suckless.org/patches/centeredmaster/)
@@ -49,16 +52,16 @@ but there are also many small changes and tweaks I've done manually, so this bui
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 - [sticky](https://dwm.suckless.org/patches/sticky/)
 - [swallow](https://dwm.suckless.org/patches/swallow/)
-- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/) (modified)
+- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
 - [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
 - [fsignal](https://dwm.suckless.org/patches/fsignal/)
-- [moveplace](https://dwm.suckless.org/patches/moveplace/) (modified)
+- [moveplace](https://dwm.suckless.org/patches/moveplace/)
 - [alpha](https://dwm.suckless.org/patches/alpha/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [bar height](https://dwm.suckless.org/patches/bar_height/)
 - [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
-- [floatrules](https://dwm.suckless.org/patches/floatrules/) (modified)
+- [floatrules](https://dwm.suckless.org/patches/floatrules/)
 
 ## Installation
 
@@ -76,5 +79,5 @@ necessary as root):
 
 - dwm is actively developed by the suckless community
     - [suckless.org](https://suckless.org)
-- some snippets of code (mostly vanitygaps for various layouts) are reimplemented copies originating from Luke Smith's dwm repo
+- some snippets of code (mostly vanitygaps for some layouts) are reimplemented copies originating from Luke Smith's dwm repo
     - [github.com/lukesmithxyz/dwm](https://github.com/lukesmithxyz/dwm)
