@@ -2944,8 +2944,8 @@ main(int argc, char *argv[])
 
 static void
 bstack(Monitor *m) {
-	int w, h, mh, mx, tx, ty, tw;
-	unsigned int i, n;
+	int w, mh, mx, tx, ty;
+	unsigned int i, n, r;
     unsigned int gi = m->gappi * enablegaps;
     unsigned int go = m->gappo * enablegaps;
 	Client *c;
@@ -2954,24 +2954,23 @@ bstack(Monitor *m) {
 	if (n == 0)
 		return;
 	if (n > m->nmaster) {
-		mh = m->nmaster ? m->mfact * (m->wh + gi) : 0;
-		tw = (m->ww - 2*go - (n - m->nmaster - 1)*gi) / (n - m->nmaster);
+		mh = m->nmaster ? m->mfact * (m->wh + gi) : go;
 		ty = m->wy + mh;
 	} else {
-		mh = m->wh - 2*go + gi;
-		tw = m->ww - 2*go;
-		ty = m->wy;
+		mh = m->wh - 2*go;
+		ty = m->wy + go;
 	}
 	for (i = mx = 0, tx = m->wx + go, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 		if (i < m->nmaster) {
-			w = (m->ww - mx - 2*go) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx + mx + go, m->wy + go, w - (2 * c->bw), mh - 2*c->bw - go - gi, 0);
+            r = MIN(n, m->nmaster) - i;
+			w = (m->ww - mx - 2*go - (r - 1)*gi) / r;
+			resize(c, m->wx + mx + go, m->wy + go, w - (2 * c->bw), mh - 2*c->bw - (gi + go)*(n > m->nmaster), 0);
 			mx += WIDTH(c) + gi;
 		} else {
-			h = m->wh - mh;
-			resize(c, tx, ty, tw - (2 * c->bw), h - (2 * c->bw) - go, 0);
-			if (tw != m->ww)
-				tx += WIDTH(c) + gi;
+            r = n - i;
+            w = (m->ww - tx - go - (r - 1)*gi) / r;
+			resize(c, tx, ty, w - (2 * c->bw), m->wh - mh - (2 * c->bw) - go, 0);
+            tx += WIDTH(c) + gi;
 		}
 	}
 }
