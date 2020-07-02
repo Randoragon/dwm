@@ -72,4 +72,9 @@ necessary as root):
 
     make clean install
 
+## References
 
+- dwm is actively developed by the suckless community
+    - [suckless.org](https://suckless.org)
+- some snippets of code (mostly vanitygaps for various layouts) are reimplemented copies originating from Luke Smith's dwm repo
+    - [github.com/lukesmithxyz/dwm](https://github.com/lukesmithxyz/dwm)
