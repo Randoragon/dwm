@@ -26,6 +26,7 @@ utilize some bar patches' features.
 - Execute arbitrary commands by sending signals
 - "throw" windows against screen borders
 - window rules: canfocus, floatrules
+- dwmblocks integration - clickable blocks ([read more](https://dwm.suckless.org/patches/statuscmd/))
 
 ## Bar features
 
@@ -67,6 +68,7 @@ so a lot of the code is slightly different from its original source.
 - [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
 - [status2d](https://dwm.suckless.org/patches/status2d/)
+- [statuscmd-signal](https://dwm.suckless.org/patches/statuscmd/)
 
 ## Installation
 
