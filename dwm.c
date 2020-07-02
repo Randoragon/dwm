@@ -3083,7 +3083,9 @@ spiral(Monitor *mon) {
 
 void
 grid(Monitor *m) {
-	unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows;
+	unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows, ew, eh;
+    unsigned int gi = m->gappi * enablegaps;
+    unsigned int go = m->gappo * enablegaps;
 	Client *c;
 
 	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
@@ -3095,15 +3097,19 @@ grid(Monitor *m) {
 			break;
 	cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
 
+    /* the amount of space windows will occupy (estate) */
+    eh = (m->wh - 2*go - (rows ? rows-1 : 0)*gi);
+    ew = (m->ww - 2*go - (cols ? cols-1 : 0)*gi);
+
 	/* window geoms (cell height/width) */
-	ch = m->wh / (rows ? rows : 1);
-	cw = m->ww / (cols ? cols : 1);
+	ch = eh / (rows ? rows : 1);
+	cw = ew / (cols ? cols : 1);
 	for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
-		cx = m->wx + (i / rows) * cw;
-		cy = m->wy + (i % rows) * ch;
+		cx = m->wx + go + (i / rows) * (cw + gi);
+		cy = m->wy + go + (i % rows) * (ch + gi);
 		/* adjust height/width of last row/column's windows */
-		ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
-		aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
+		ah = ((i + 1) % rows == 0) ? eh - ch * rows : 0;
+		aw = (i >= rows * (cols - 1)) ? ew - cw * cols : 0;
 		resize(c, cx, cy, cw - 2 * c->bw + aw, ch - 2 * c->bw + ah, False);
 		i++;
 	}
