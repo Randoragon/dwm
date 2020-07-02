@@ -3204,47 +3204,66 @@ centeredmaster(Monitor *m)
 void
 centeredfloatingmaster(Monitor *m)
 {
-	unsigned int i, n, w, mh, mw, mx, mxo, my, myo, tx;
+	unsigned int i, n;
+	float mfacts, sfacts;
+	int mrest, srest;
+	int mx = 0, my = 0, mh = 0, mw = 0;
+	int sx = 0, sy = 0, sh = 0, sw = 0;
 	Client *c;
 
-	/* count number of clients in the selected monitor */
+	float mivf = 1.0; // master inner vertical gap factor
+	unsigned int go = m->gappo * enablegaps;
+	unsigned int gi = m->gappi * enablegaps;
+
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
 		return;
 
-	/* initialize nmaster area */
-	if (n > m->nmaster) {
+	sx = mx = m->wx + go;
+	sy = my = m->wy + go;
+	sh = mh = m->wh - 2*go;
+	mw = m->ww - 2*go - gi*(n - 1);
+	sw = m->ww - 2*go - gi*(n - m->nmaster - 1);
+
+	if (m->nmaster && n > m->nmaster) {
+		mivf = 0.8;
 		/* go mfact box in the center if more than nmaster clients */
 		if (m->ww > m->wh) {
-			mw = m->nmaster ? m->ww * m->mfact : 0;
-			mh = m->nmaster ? m->wh * 0.9 : 0;
+			mw = m->ww * m->mfact - gi*mivf*(MIN(n, m->nmaster) - 1);
+			mh = m->wh * 0.9 - 2*go;
 		} else {
-			mh = m->nmaster ? m->wh * m->mfact : 0;
-			mw = m->nmaster ? m->ww * 0.9 : 0;
+			mw = m->ww * 0.9 - gi*mivf*(MIN(n, m->nmaster) - 1);
+			mh = m->wh * m->mfact;
 		}
-		mx = mxo = (m->ww - mw) / 2;
-		my = myo = (m->wh - mh) / 2;
-	} else {
-		/* go fullscreen if all clients are in the master area */
-		mh = m->wh;
-		mw = m->ww;
-		mx = mxo = 0;
-		my = myo = 0;
+		mx = m->wx + (m->ww - mw) / 2;
+		my = m->wy + (m->wh - mh) / 2;
+
+		sx = m->wx + go;
+		sy = m->wy + go;
+		sh = m->wh - 2*go;
 	}
 
-	for(i = tx = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-	if (i < m->nmaster) {
-		/* nmaster clients are stacked horizontally, in the center
-		 * of the screen */
-		w = (mw + mxo - mx) / (MIN(n, m->nmaster) - i);
-		resize(c, m->wx + mx, m->wy + my, w - (2*c->bw),
-		       mh - (2*c->bw), 0);
-		mx += WIDTH(c);
-	} else {
-		/* stack clients are stacked horizontally */
-		w = (m->ww - tx) / (n - i);
-		resize(c, m->wx + tx, m->wy, w - (2*c->bw),
-		       m->wh - (2*c->bw), 0);
-		tx += WIDTH(c);
-	}
+    int mtotal = 0, stotal = 0;
+    for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+    mfacts = MIN(n, m->nmaster);
+    sfacts = n - m->nmaster;
+
+    for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++)
+        if (n < m->nmaster)
+            mtotal += mw / mfacts;
+        else
+            stotal += sw / sfacts;
+    mrest = mw - mtotal;
+    srest = sw - stotal;
+
+	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		if (i < m->nmaster) {
+			/* nmaster clients are stacked horizontally, in the center of the screen */
+			resize(c, mx, my, (mw / mfacts) + (i < mrest ? 1 : 0) - (2*c->bw), mh - (2*c->bw), 0);
+			mx += WIDTH(c) + gi*mivf;
+		} else {
+			/* stack clients are stacked horizontally */
+			resize(c, sx, sy, (sw / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), sh - (2*c->bw), 0);
+			sx += WIDTH(c) + gi;
+		}
 }
