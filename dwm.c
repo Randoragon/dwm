@@ -1338,7 +1338,6 @@ void
 monocle(Monitor *m)
 {
 	unsigned int n = 0;
-    unsigned int gi = m->gappi * enablegaps;
     unsigned int go = m->gappo * enablegaps;
 	Client *c;
 
@@ -2947,30 +2946,32 @@ static void
 bstack(Monitor *m) {
 	int w, h, mh, mx, tx, ty, tw;
 	unsigned int i, n;
+    unsigned int gi = m->gappi * enablegaps;
+    unsigned int go = m->gappo * enablegaps;
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
 		return;
 	if (n > m->nmaster) {
-		mh = m->nmaster ? m->mfact * m->wh : 0;
-		tw = m->ww / (n - m->nmaster);
+		mh = m->nmaster ? m->mfact * (m->wh + gi) : 0;
+		tw = (m->ww - 2*go - (n - m->nmaster - 1)*gi) / (n - m->nmaster);
 		ty = m->wy + mh;
 	} else {
-		mh = m->wh;
-		tw = m->ww;
+		mh = m->wh - 2*go + gi;
+		tw = m->ww - 2*go;
 		ty = m->wy;
 	}
-	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
+	for (i = mx = 0, tx = m->wx + go, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 		if (i < m->nmaster) {
-			w = (m->ww - mx) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
-			mx += WIDTH(c);
+			w = (m->ww - mx - 2*go) / (MIN(n, m->nmaster) - i);
+			resize(c, m->wx + mx + go, m->wy + go, w - (2 * c->bw), mh - 2*c->bw - go - gi, 0);
+			mx += WIDTH(c) + gi;
 		} else {
 			h = m->wh - mh;
-			resize(c, tx, ty, tw - (2 * c->bw), h - (2 * c->bw), 0);
+			resize(c, tx, ty, tw - (2 * c->bw), h - (2 * c->bw) - go, 0);
 			if (tw != m->ww)
-				tx += WIDTH(c);
+				tx += WIDTH(c) + gi;
 		}
 	}
 }
