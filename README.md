@@ -73,12 +73,12 @@ so a lot of the code is slightly different from its original source.
 
 ## Status Bar Rewrite
 
-Apparently [XStoreName cannot handle all character encodings well] (see second last paragraph in Description), which
+Apparently [XStoreName cannot handle all character encodings well](https://linux.die.net/man/3/xstorename) (see second last paragraph in Description), which
 actually caused me many instant crashes that were pretty hard to trace when I was trying to get the bar to display
 icons from FontAwesome or Unicode characters. Since that's an inherent weakness of the WM\_NAME property, I thought
 of an alternative solution:
 
-- dwm spawn a fork of itself with shared memory which reads from a named pipe
+- dwm spawns a fork of itself with shared memory which reads from a named pipe
 - dwmblocks writes the status strings to the named pipe and sends a fake SIGUSR1 to dwm
 using [fsignal](https://dwm.suckless.org/patches/fsignal/)
 - dwm copies data from shared memory to the status bar everytime it receives the SIGUSR1 signal
