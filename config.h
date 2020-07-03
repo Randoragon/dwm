@@ -67,6 +67,7 @@ static Sp scratchpads[] = {
 static Signal signals[] = {
 	/* signum               function        argument*/
 	{ 15,                   quit,           {0} },
+	{ 10,                   updatestatus,   {0} },
 };
 
 /* tagging */

@@ -43,11 +43,17 @@
 #include <X11/Xft/Xft.h>
 #include <X11/Xlib-xcb.h>
 #include <xcb/res.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <pwd.h>
 
 #include "drw.h"
 #include "util.h"
 
 /* macros */
+#define RELFIFO                 ".cache/dwmblocks.fifo"
+#define SLENGTH                 1024     /* this must match CMDLENGTH macro in dwmblocks.c */
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
 #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
@@ -181,7 +187,6 @@ static void clientmessage(XEvent *e);
 static void configure(Client *c);
 static void configurenotify(XEvent *e);
 static void configurerequest(XEvent *e);
-static void copyvalidchars(char *text, char *rawtext);
 static Monitor *createmon(void);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
@@ -270,7 +275,7 @@ static void updateclientlist(void);
 static int updategeom(void);
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
-static void updatestatus(void);
+static void updatestatus(const Arg *arg);
 static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
@@ -297,15 +302,22 @@ static void fibonacci(Monitor *mon, int s);
 static void dwindle(Monitor *mon);
 static void spiral(Monitor *mon);
 static void grid(Monitor *m);
+static void watchfifo();
 
 /* variables */
+static char fifopath[256];
+static int fifofd;
+static char *sharedmemory;
+static const char *sharedmemoryname = "/dwmstatus";
+static int sharedmemoryfd;
+static pid_t pid;
 static Client *prevzoom = NULL;
 static const char autostartblocksh[] = "autostart_blocking.sh";
 static const char autostartsh[] = "autostart.sh";
 static const char broken[] = "broken";
 static const char dwmdir[] = "dwm";
 static const char localshare[] = ".local/share";
-static char stext[4096];
+static char stext[SLENGTH];
 static char rawstext[256];
 static int dwmblockssig;
 pid_t dwmblockspid = 0;
@@ -658,6 +670,9 @@ cleanup(void)
 	XSync(dpy, False);
 	XSetInputFocus(dpy, PointerRoot, RevertToPointerRoot, CurrentTime);
 	XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
+
+    kill(pid, SIGTERM);
+    shm_unlink(sharedmemoryname);
 }
 
 void
@@ -792,19 +807,6 @@ configurerequest(XEvent *e)
 		XConfigureWindow(dpy, ev->window, ev->value_mask, &wc);
 	}
 	XSync(dpy, False);
-}
-
-void
-copyvalidchars(char *text, char *rawtext)
-{
-	int i = -1, j = 0;
-
-	while(rawtext[++i]) {
-		if ((unsigned char)rawtext[i] >= ' ') {
-			text[j++] = rawtext[i];
-		}
-	}
-	text[j] = '\0';
 }
 
 Monitor *
@@ -1711,11 +1713,9 @@ propertynotify(XEvent *e)
 	Window trans;
 	XPropertyEvent *ev = &e->xproperty;
 
-	if ((ev->window == root) && (ev->atom == XA_WM_NAME)) {
-		if (!fake_signal())
-			updatestatus();
-    }
-	else if (ev->state == PropertyDelete)
+    if ((ev->window == root) && (ev->atom == XA_WM_NAME))
+        fake_signal();
+    else if (ev->state == PropertyDelete)
 		return; /* ignore */
 	else if ((c = wintoclient(ev->window))) {
 		switch(ev->atom) {
@@ -2268,7 +2268,6 @@ setup(void)
 		scheme[i] = drw_scm_create(drw, colors[i], alphas[i], 3);
 	/* init bars */
 	updatebars();
-	updatestatus();
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
@@ -2765,12 +2764,18 @@ updatesizehints(Client *c)
 }
 
 void
-updatestatus(void)
+updatestatus(const Arg *arg)
 {
-	if (!gettextprop(root, XA_WM_NAME, rawstext, sizeof(rawstext)))
-		strcpy(stext, "dwm-"VERSION);
-	else
-		copyvalidchars(stext, rawstext);
+    int i;
+    char *sm = sharedmemory;
+    for (i = 0; i < SLENGTH && sm[i] != '\0' && sm[i] != '\n'; i++);
+    if (i == SLENGTH) {
+        fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SLENGTH);
+        i--;
+    }
+    sm[i] = '\0';
+    strcpy(stext, sm);
+
 	drawbar(selmon);
 }
 
@@ -3093,6 +3098,54 @@ zoom(const Arg *arg)
 	arrange(c->mon);
 }
 
+void
+watchfifo()
+{
+    // Prepare fifo file
+    /* If a file exists at the fifo path which either is not a named pipe OR there's no rw perms,
+     * then there's no way to proceed and status bar won't work. In any other case either create a
+     * new fifo or try to connect to the found one.
+     */
+    if (access(fifopath, F_OK) != -1) {
+        // https://stackoverflow.com/questions/21468856/check-if-file-is-a-named-pipe-fifo-in-c
+        struct stat st;
+        if ((stat(fifopath, &st) || !S_ISFIFO(st.st_mode)) && remove(fifopath)) {
+            fprintf(stderr, "dwm~: a non-fifo file already exists at \"%s\" and remove failed\n", fifopath);
+        }
+        if (access(fifopath, W_OK|R_OK) == -1) {
+            fprintf(stderr, "dwm~: fifo found but no read/write permissions\n");
+        }
+    } else if (mkfifo(fifopath, (mode_t)0660)) {
+        fprintf(stderr, "dwm~: failed to initialize fifo at \"%s\"\n", fifopath);
+    }
+
+    while(running) {
+        errno = 0;
+        fifofd = open(fifopath, O_RDONLY);
+        if (errno) {
+            perror("dwm~: failed to open fifo");
+        } else {
+            char newstatus[SLENGTH] = {0};
+            while(read(fifofd, newstatus, SLENGTH)) {
+                int i;
+                /* trim newlines and protect against buffer overflow */
+                for (i = 0; i < SLENGTH && newstatus[i] != '\n' && newstatus[i] != '\0'; i++);
+                if (i == SLENGTH) {
+                    fprintf(stderr, "dwm~: message exceeds block size %u, truncating", SLENGTH);
+                    i--;
+                }
+                newstatus[i] = '\0';
+                strcpy(sharedmemory, newstatus);
+                newstatus[0] = '\0';
+            }
+            /* fifo reached EOF, which means it was closed on the sender's side (dwmblocks) */
+            close(fifofd);
+        }
+        sleep(2);
+        fprintf(stderr, "dwm~: retrying fifo access");
+    }
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -3107,16 +3160,41 @@ main(int argc, char *argv[])
 	if (!(xcon = XGetXCBConnection(dpy)))
 		die("dwm: cannot get xcb connection\n");
 	checkotherwm();
-	setup();
+    
+    /* construct fifo path */
+    strcpy(fifopath, getpwuid(getuid())->pw_dir);
+    strcat(fifopath, "/");
+    strcat(fifopath, RELFIFO);
+
+    /* initialize shared memory */
+    sharedmemoryfd = shm_open(sharedmemoryname, O_CREAT|O_RDWR, S_IRWXU|S_IRWXG);
+    if (sharedmemoryfd < 0) {
+        perror("dwm: failed to open shared memory");
+        return EXIT_FAILURE;
+    }
+    ftruncate(sharedmemoryfd, SLENGTH);
+    sharedmemory = (char*)mmap(NULL, SLENGTH, PROT_READ|PROT_WRITE, MAP_SHARED, sharedmemoryfd, 0);
+    if (sharedmemory == NULL) {
+        fprintf(stderr, "dwm: failed to run mmap");
+        return EXIT_FAILURE;
+    }
+
+    /* spawn a subprocess to watch status text fifo */
+    pid = fork();
+    if (pid == 0) {
+        setup();
 #ifdef __OpenBSD__
-	if (pledge("stdio rpath proc exec", NULL) == -1)
-		die("pledge");
+        if (pledge("stdio rpath proc exec", NULL) == -1)
+            die("pledge");
 #endif /* __OpenBSD__ */
-	scan();
-	runautostart();
-	run();
-	cleanup();
-	XCloseDisplay(dpy);
+        scan();
+        runautostart();
+        run();
+        cleanup();
+        XCloseDisplay(dpy);
+    } else if (pid > 0) {
+        watchfifo();
+    }
 	return EXIT_SUCCESS;
 }
 

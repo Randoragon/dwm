@@ -26,7 +26,8 @@ utilize some bar patches' features.
 - Execute arbitrary commands by sending signals
 - "throw" windows against screen borders
 - window rules: canfocus, floatrules
-- dwmblocks integration - clickable blocks ([read more](https://dwm.suckless.org/patches/statuscmd/))
+- dwmblocks integration - see [statuscmd patch](https://dwm.suckless.org/patches/statuscmd/) and read the section below patches,
+  I've actually rewritten much of dwm's status bar functionality to be more flexible for my needs.
 
 ## Bar features
 
@@ -69,6 +70,21 @@ so a lot of the code is slightly different from its original source.
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
 - [status2d](https://dwm.suckless.org/patches/status2d/)
 - [statuscmd-signal](https://dwm.suckless.org/patches/statuscmd/)
+
+## Status Bar Rewrite
+
+Apparently [XStoreName cannot handle all character encodings well] (see second last paragraph in Description), which
+actually caused me many instant crashes that were pretty hard to trace when I was trying to get the bar to display
+icons from FontAwesome or Unicode characters. Since that's an inherent weakness of the WM\_NAME property, I thought
+of an alternative solution:
+
+- dwm spawn a fork of itself with shared memory which reads from a named pipe
+- dwmblocks writes the status strings to the named pipe and sends a fake SIGUSR1 to dwm
+using [fsignal](https://dwm.suckless.org/patches/fsignal/)
+- dwm copies data from shared memory to the status bar everytime it receives the SIGUSR1 signal
+
+Maybe someday I will make this into a patch, because it works rather well, is fully asynchronous and very stable
+(you can turn dwmblocks on and off repeatedly without the bar breaking).
 
 ## Installation
 
