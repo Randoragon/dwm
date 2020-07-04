@@ -26,8 +26,7 @@ utilize some bar patches' features.
 - Execute arbitrary commands by sending signals
 - "throw" windows against screen borders
 - window rules: canfocus, floatrules
-- dwmblocks integration - see [statuscmd patch](https://dwm.suckless.org/patches/statuscmd/) and read the section below patches,
-  I've actually rewritten much of dwm's status bar functionality to be more flexible for my needs.
+- dwmblocks integration - read the [Status Bar Rewrite section](https://github.com/Randoragon/dwm#status-bar-rewrite)
 
 ## Bar features
 
@@ -37,6 +36,11 @@ utilize some bar patches' features.
 - customizable bar text horizontal padding
 - custom bar height
 - window name is centered between tags and status text
+
+I currently don't have plans of adding clickable bar modules, because the
+[status2d](https://dwm.suckless.org/patches/status2d/) patch is not easily comptible with the
+[statuscmd](https://dwm.suckless.org/patches/statuscmd/) patch and making them both work would
+require a lot of effort for a feature that I can comfortably do without.
 
 ## Applied Patches
 
@@ -69,7 +73,6 @@ so a lot of the code is slightly different from its original source.
 - [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
 - [status2d](https://dwm.suckless.org/patches/status2d/)
-- [statuscmd-signal](https://dwm.suckless.org/patches/statuscmd/)
 
 ## Status Bar Rewrite
 
