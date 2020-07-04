@@ -51,7 +51,9 @@
 #include "util.h"
 
 /* macros */
-#define SLENGTH                 1024     /* this must match CMDLENGTH macro in dwmblocks.c */
+#define DWMBLOCKS_MODULES       4    /* the number of modules defined for dwmblocks */
+#define DWMBLOCKS_CMDLENGTH     1024 /* CMDLENGTH macro in dwmblocks.c */
+#define SLENGTH                 (DWMBLOCKS_MODULES * DWMBLOCKS_CMDLENGTH)     
 #define SHM_NAME                "/dwmstatus"
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
