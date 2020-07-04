@@ -78,10 +78,9 @@ actually caused me many instant crashes that were pretty hard to trace when I wa
 icons from FontAwesome or Unicode characters. Since that's an inherent weakness of the WM\_NAME property, I thought
 of an alternative solution:
 
-- dwm spawns a fork of itself with shared memory which reads from a named pipe
-- dwmblocks writes the status strings to the named pipe and sends a fake SIGUSR1 to dwm
-using [fsignal](https://dwm.suckless.org/patches/fsignal/)
-- dwm copies data from shared memory to the status bar everytime it receives the SIGUSR1 signal
+Both dwm and dwmblocks initialize a block of shared memory. dwmblocks writes status strings to the shared memory,
+then uses [fsignal](https://dwm.suckless.org/patches/fsignal/) to send SIGUSR1 to dwm. dwm updates the status
+text from shared memory every time it receives the SIGUSR1 fake signal.
 
 Maybe someday I will make this into a patch, because it works rather well, is fully asynchronous and very stable
 (you can turn dwmblocks on and off repeatedly without the bar breaking).
