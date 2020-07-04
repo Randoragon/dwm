@@ -303,6 +303,7 @@ static void spiral(Monitor *mon);
 static void grid(Monitor *m);
 
 /* variables */
+static unsigned int tagw;
 static char *sharedmemory;
 static int sharedmemoryfd;
 static Client *prevzoom = NULL;
@@ -588,7 +589,7 @@ buttonpress(XEvent *e)
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
 		do
-			x += TEXTW(tags[i]);
+			x += tagw;
 		while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
@@ -999,26 +1000,22 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
-    /* we want all tags to have equal width, so we use the widest one as reference */
-    w = 0;
-    for (i = 0; i < LENGTH(tags); i++) {
-        w = TEXTW(tags[i]) > w ? TEXTW(tags[i]) : w;
-    }
+
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
         int toffset; /* since tags are wider than text within, calculate the offset so text is centered */
-        toffset = (w - TEXTW(tags[i]) + lrpad) / 2;
+        toffset = (tagw - TEXTW(tags[i]) + lrpad) / 2;
         drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeTagsSel : (urg & 1 << i ? SchemeTagsUrg : SchemeTagsNorm)]);
-		drw_text(drw, x, 0, w, bh, toffset, tags[i], 0);
+		drw_text(drw, x, 0, tagw, bh, toffset, tags[i], 0);
 		if (occ & 1 << i) {
 			drw_rect(drw, x + boxs, boxs, boxw, boxw, 1, 1);
             drw_rect(drw, x + boxs, boxs, boxw, boxw, (m == selmon && selmon->sel && selmon->sel->tags & 1 << i), 0);
         }
         if (m->tagset[m->seltags] & 1 << i) {
             drw_setscheme(drw, scheme[SchemeSel]);
-			drw_rect(drw, x, bh - 2, w, 2, 1, 1);
+			drw_rect(drw, x, bh - 2, tagw, 2, 1, 1);
         }
-		x += w;
+		x += tagw;
 	}
 	w = blw = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeTagsNorm]);
@@ -2262,6 +2259,10 @@ setup(void)
 	/* init bars */
 	updatebars();
     updatestatus(NULL);
+    tagw = TEXTW(tags[0]);
+    for (i = 1; i < LENGTH(tags); i++) {
+        tagw = (TEXTW(tags[i]) > tagw ? TEXTW(tags[i]) : tagw);
+    }
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
