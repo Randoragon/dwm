@@ -27,6 +27,7 @@ utilize some bar patches' features.
 - "throw" windows against screen borders
 - window rules: canfocus, floatrules
 - dwmblocks integration - read the [Status Bar Rewrite section](https://github.com/Randoragon/dwm#status-bar-rewrite)
+- color fonts support (will crash if you don't have [xft-bgra](https://aur.archlinux.org/packages/libxft-bgra) installed!)
 
 ## Bar features
 

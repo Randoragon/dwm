@@ -11,9 +11,9 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 20;       /* 0 means that dwm will calculate bar */
 static const int startontag         = 1 << 3;   /* 0 means no tag active on start */
 static const char *fonts[]          = {
+    "dejavu sans:size=9:antialias=true",
     "font awesome 5 free solid:fontformat=truetype:size=10:antialias=true;3",
     "font awesome 5 brands regular:fontformat=truetype:size=10:antialias=true;3",
-    "dejavu sans:size=9:antialias=true",
 };
 static int lrpad                    = 6;       /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char col_gray1[]       = "#050505";
