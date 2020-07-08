@@ -8,12 +8,12 @@ static const unsigned int gappo     = 30;       /* outer gap between windows and
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 20;       /* 0 means that dwm will calculate bar */
+static const int user_bh            = 19;       /* 0 means that dwm will calculate bar */
 static const int startontag         = 1 << 3;   /* 0 means no tag active on start */
 static const char *fonts[]          = {
-    "dejavu sans:size=9:antialias=true",
-    "font awesome 5 free solid:fontformat=truetype:size=10:antialias=true;3",
-    "font awesome 5 brands regular:fontformat=truetype:size=10:antialias=true;3",
+    "dejavu sans:size=8:antialias=true",
+    "font awesome 5 free solid:fontformat=truetype:size=9:antialias=true",
+    "font awesome 5 brands regular:fontformat=truetype:size=9:antialias=true",
 };
 static int lrpad                    = 6;       /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char col_gray1[]       = "#050505";
