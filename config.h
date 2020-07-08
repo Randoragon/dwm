@@ -11,7 +11,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 19;       /* 0 means that dwm will calculate bar */
 static const int startontag         = 1 << 3;   /* 0 means no tag active on start */
 static const char *fonts[]          = {
-    "dejavu sans:size=8:antialias=true",
+    "dejavu sans mono:size=9:antialias=true",
     "font awesome 5 free solid:fontformat=truetype:size=9:antialias=true",
     "font awesome 5 brands regular:fontformat=truetype:size=9:antialias=true",
 };
@@ -21,7 +21,6 @@ static const char col_gray2[]       = "#222222";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#dfdfdf";
 static const char col_yellow1[]     = "#ffb52a";
-static const char col_yellow2[]     = "#ffd05a";
 static const char col_red[]         = "#bd2c40";
 static const unsigned int baralpha = 200;
 static const unsigned int borderalpha = OPAQUE;
@@ -33,8 +32,8 @@ static const char *colors[][3]      = {
 	[SchemeTagsSel]  = { col_gray4,    col_gray2,    "#000000"   }, // Tagbar left selected {text,background,not used but cannot be empty}
     [SchemeTagsNorm] = { col_gray4,    col_gray1,    "#000000"   }, // Tagbar left unselected {text,background,not used but cannot be empty}
     [SchemeTagsUrg]  = { col_gray4,    col_red,      "#000000"   }, // Tagbar left urgent {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { col_yellow2,  col_gray1,    "#000000"   }, // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm] = { col_yellow2,  col_gray1,    "#000000"   }, // infobar middle  unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { "#FFFFFF",    col_gray2,    "#000000"   }, // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm] = { "#FFFFFF",    col_gray2,    "#000000"   }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 static const unsigned int alphas[][3]      = {
 	/*                   fg      bg        border     */
