@@ -51,8 +51,8 @@
 #include "util.h"
 
 /* macros */
-#define DWMBLOCKS_MODULES       4    /* the number of modules defined for dwmblocks */
-#define DWMBLOCKS_CMDLENGTH     1024 /* CMDLENGTH macro in dwmblocks.c */
+#define DWMBLOCKS_MODULES       11   /* the number of modules defined for dwmblocks */
+#define DWMBLOCKS_CMDLENGTH     300  /* CMDLENGTH macro in dwmblocks.c */
 #define SLENGTH                 (DWMBLOCKS_MODULES * DWMBLOCKS_CMDLENGTH)     
 #define SHM_NAME                "/dwmstatus"
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
