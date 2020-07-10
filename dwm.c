@@ -3071,7 +3071,7 @@ main(int argc, char *argv[])
         fprintf(stderr, "dwm: failed to run mmap");
         return EXIT_FAILURE;
     }
-    strcpy(sharedmemory, "^c#FFFFFF^dwmblocks is offline^f5^");
+    strcpy(sharedmemory, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
 
     setup();
 
