@@ -1,4 +1,4 @@
-# dwm - suckless window manager
+ dwm - suckless window manager
 
 My build of dwm, the minimalist, fast and flexible window manager with focus on productivity.
 
@@ -85,6 +85,10 @@ of an alternative solution:
 Both dwm and dwmblocks initialize a block of shared memory. dwmblocks writes status strings to the shared memory,
 then uses [fsignal](https://dwm.suckless.org/patches/fsignal/) to send SIGUSR1 to dwm. dwm updates the status
 text from shared memory every time it receives the SIGUSR1 fake signal.
+
+As an additional convention, the first byte of shared memory is a boolean value representing whether or not
+the status bar is shown. It is updated in dwm's togglebar function. The purpose is for dwmblocks to only
+run scripts when necessary, so whenever the first byte is 0, it will skip calling the scripts entirely.
 
 Maybe someday I will make this into a patch, because it works rather well, is fully asynchronous and very stable
 (you can turn dwmblocks on and off repeatedly without the bar breaking).

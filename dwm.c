@@ -2366,6 +2366,7 @@ void
 togglebar(const Arg *arg)
 {
 	selmon->showbar = !selmon->showbar;
+    sharedmemory[0] = selmon->showbar ? 1 : 0;
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
@@ -2714,7 +2715,7 @@ updatestatus(const Arg *arg)
 {
     int i;
     char *sm = sharedmemory;
-    for (i = 0; i < SLENGTH && sm[i] != '\0' && sm[i] != '\n'; i++);
+    for (i = 1; i < SLENGTH && sm[i] != '\0' && sm[i] != '\n'; i++);
     if (i == SLENGTH) {
         fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SLENGTH);
         i--;
@@ -3071,7 +3072,9 @@ main(int argc, char *argv[])
         fprintf(stderr, "dwm: failed to run mmap");
         return EXIT_FAILURE;
     }
-    strcpy(sharedmemory, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
+    /* the first byte denotes bar visibility */
+    sharedmemory[0] = 1;
+    strcpy(sharedmemory + 1, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
 
     setup();
 
