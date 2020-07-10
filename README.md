@@ -89,6 +89,7 @@ text from shared memory every time it receives the SIGUSR1 fake signal.
 As an additional convention, the first byte of shared memory is a boolean value representing whether or not
 the status bar is shown. It is updated in dwm's togglebar function. The purpose is for dwmblocks to only
 run scripts when necessary, so whenever the first byte is 0, it will skip calling the scripts entirely.
+Note that this only applies to interval-based scripts, signals will be handled as always.
 
 Maybe someday I will make this into a patch, because it works rather well, is fully asynchronous and very stable
 (you can turn dwmblocks on and off repeatedly without the bar breaking).
