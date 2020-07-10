@@ -2721,7 +2721,7 @@ updatestatus(const Arg *arg)
         i--;
     }
     sm[i] = '\0';
-    strcpy(stext, sm);
+    strcpy(stext, sm + 1);
 
 	drawbar(selmon);
 }
