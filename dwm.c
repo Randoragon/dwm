@@ -51,9 +51,7 @@
 #include "util.h"
 
 /* macros */
-#define DWMBLOCKS_MODULES       11   /* the number of modules defined for dwmblocks */
-#define DWMBLOCKS_CMDLENGTH     300  /* CMDLENGTH macro in dwmblocks.c */
-#define SLENGTH                 (DWMBLOCKS_MODULES * DWMBLOCKS_CMDLENGTH)     
+#define SHM_SIZE                1500    /* this must be equal to SHM_SIZE in dwmblocks's config.h */
 #define SHM_NAME                "/dwmstatus"
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
@@ -312,7 +310,7 @@ static const char autostartsh[] = "autostart.sh";
 static const char broken[] = "broken";
 static const char dwmdir[] = "dwm";
 static const char localshare[] = ".local/share";
-static char stext[SLENGTH];
+static char stext[SHM_SIZE];
 static int scanner;
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
@@ -2715,9 +2713,9 @@ updatestatus(const Arg *arg)
 {
     int i;
     char *sm = sharedmemory;
-    for (i = 1; i < SLENGTH && sm[i] != '\0' && sm[i] != '\n'; i++);
-    if (i == SLENGTH) {
-        fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SLENGTH);
+    for (i = 1; i < SHM_SIZE && sm[i] != '\0' && sm[i] != '\n'; i++);
+    if (i == SHM_SIZE) {
+        fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SHM_SIZE);
         i--;
     }
     sm[i] = '\0';
@@ -3066,8 +3064,8 @@ main(int argc, char *argv[])
         perror("dwm: failed to open shared memory");
         return EXIT_FAILURE;
     }
-    ftruncate(sharedmemoryfd, SLENGTH);
-    sharedmemory = (char*)mmap(NULL, SLENGTH, PROT_READ|PROT_WRITE, MAP_SHARED, sharedmemoryfd, 0);
+    ftruncate(sharedmemoryfd, SHM_SIZE);
+    sharedmemory = (char*)mmap(NULL, SHM_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, sharedmemoryfd, 0);
     if (sharedmemory == NULL) {
         fprintf(stderr, "dwm: failed to run mmap");
         return EXIT_FAILURE;
