@@ -130,6 +130,7 @@ static Key keys[] = {
    /* type          modifier                      key               function        argument */
 	{ KeyPress,     MODKEY,                       XK_o,             spawn,          {.v = dmenucmd } },
 	{ KeyPress,     MODKEY,                       XK_b,             togglebar,      {0} },
+	{ KeyPress,     MODKEY|ShiftMask,             XK_b,             togglestatus,   {0} },
 	{ KeyPress,     MODKEY,                       XK_j,             focusstack,     {.i = +1 } },
 	{ KeyPress,     MODKEY,                       XK_k,             focusstack,     {.i = -1 } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_j,             movestack,      {.i = +1 } },

@@ -149,6 +149,7 @@ struct Monitor {
 	unsigned int sellt;
 	unsigned int tagset[2];
 	int showbar;
+    int showstatus;
 	int topbar;
 	Client *clients;
 	Client *sel;
@@ -257,6 +258,7 @@ static void tagtoleft(const Arg *arg);
 static void tagtoright(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
+static void togglestatus(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void togglesticky(const Arg *arg);
@@ -299,6 +301,7 @@ static void fibonacci(Monitor *mon, int s);
 static void dwindle(Monitor *mon);
 static void spiral(Monitor *mon);
 static void grid(Monitor *m);
+static void dwmblocks_send(int sigtype);
 
 /* variables */
 static unsigned int tagw;
@@ -2364,10 +2367,20 @@ void
 togglebar(const Arg *arg)
 {
 	selmon->showbar = !selmon->showbar;
-    sharedmemory[0] = selmon->showbar ? 1 : 0;
+    selmon->showstatus = selmon->showbar;
+    sharedmemory[4] = selmon->showstatus ? 1 : 0;
+    dwmblocks_send(SIGHUP);
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
+}
+
+void
+togglestatus(const Arg *arg)
+{
+    selmon->showstatus = !selmon->showstatus;
+    sharedmemory[4] = selmon->showstatus ? 1 : 0;
+    dwmblocks_send(SIGHUP);
 }
 
 void
@@ -2713,13 +2726,13 @@ updatestatus(const Arg *arg)
 {
     int i;
     char *sm = sharedmemory;
-    for (i = 1; i < SHM_SIZE && sm[i] != '\0' && sm[i] != '\n'; i++);
+    for (i = 5; i < SHM_SIZE && sm[i] != '\0' && sm[i] != '\n'; i++);
     if (i == SHM_SIZE) {
         fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SHM_SIZE);
         i--;
     }
     sm[i] = '\0';
-    strcpy(stext, sm + 1);
+    strcpy(stext, sm + 5);
 
 	drawbar(selmon);
 }
@@ -3070,9 +3083,14 @@ main(int argc, char *argv[])
         fprintf(stderr, "dwm: failed to run mmap");
         return EXIT_FAILURE;
     }
-    /* the first byte denotes bar visibility */
-    sharedmemory[0] = 1;
-    strcpy(sharedmemory + 1, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
+    /* the first 4 bytes will be overwritten by dwmblocks with its pid */
+    memset(sharedmemory, 0, 4);
+
+
+    /* the fifth byte denotes bar visibility */
+    sharedmemory[4] = 1;
+
+    strcpy(sharedmemory + 5, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
 
     setup();
 
@@ -3409,4 +3427,18 @@ centeredfloatingmaster(Monitor *m)
 			resize(c, sx, sy, (sw / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), sh - (2*c->bw), 0);
 			sx += WIDTH(c) + gi;
 		}
+}
+
+static void dwmblocks_send(int sigtype)
+{
+    /* dwmblocks has an easy way to communicate with dwm via fsignals.
+     * However, dwm doesn't have a good method to do the reverse.
+     * That's why, by convention, dwmblocks uses the first 4 bytes
+     * of shared memory to store its PID, so that dwm can read it
+     * and send signals when needed.
+     */
+    pid_t pid;
+    memcpy(&pid, sharedmemory, 4);
+    if (pid)
+        kill(pid, sigtype);
 }

@@ -36,7 +36,8 @@ utilize some bar patches' features.
 - custom foreground and background colors
 - customizable bar text horizontal padding
 - custom bar height
-- window name is centered between tags and status text
+- dwmblocks won't consume CPU power when bar is toggled off
+- toggle dwmblocks without toggling the entire bar
 
 I currently don't have plans of adding clickable bar modules, because the
 [status2d](https://dwm.suckless.org/patches/status2d/) patch is not easily comptible with the
@@ -86,10 +87,10 @@ Both dwm and dwmblocks initialize a block of shared memory. dwmblocks writes sta
 then uses [fsignal](https://dwm.suckless.org/patches/fsignal/) to send SIGUSR1 to dwm. dwm updates the status
 text from shared memory every time it receives the SIGUSR1 fake signal.
 
-As an additional convention, the first byte of shared memory is a boolean value representing whether or not
-the status bar is shown. It is updated in dwm's togglebar function. The purpose is for dwmblocks to only
-run scripts when necessary, so whenever the first byte is 0, it will skip calling the scripts entirely.
-Note that this only applies to interval-based scripts, signals will be handled as always.
+To allow dwm to send signals directly to dwmblocks, by convention dwmblocks will set the first 4 bytes of
+shared memory to its PID. Additionally, the 5th byte denotes bar visibility, is set by dwm and read by dwmblocks.
+The purpose is for dwmblocks to only run scripts when necessary, so whenever the first byte is 0, it will skip
+calling the scripts entirely. Note that this only applies to interval-based scripts, signals will be handled as always.
 
 Maybe someday I will make this into a patch, because it works rather well, is fully asynchronous and very stable
 (you can turn dwmblocks on and off repeatedly without the bar breaking).
