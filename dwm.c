@@ -794,6 +794,7 @@ createmon(void)
 	m->mfact = mfact;
 	m->nmaster = nmaster;
 	m->showbar = showbar;
+	m->showstatus = 1;
 	m->topbar = topbar;
 	m->gappi = gappi;
 	m->gappo = gappo;
