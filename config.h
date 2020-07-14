@@ -121,14 +121,11 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *quitcmd[] = { "quitmenu", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
    /* type          modifier                      key               function        argument */
-	{ KeyPress,     MODKEY,                       XK_o,             spawn,          {.v = dmenucmd } },
 	{ KeyPress,     MODKEY,                       XK_b,             togglebar,      {0} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_b,             togglestatus,   {0} },
 	{ KeyPress,     MODKEY,                       XK_j,             focusstack,     {.i = +1 } },

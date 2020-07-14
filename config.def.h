@@ -12,7 +12,6 @@ static const int user_bh            = 0;        /* 0 means that dwm will calcula
 static const int startontag         = 1;        /* 0 means no tag active on start */
 static const char *fonts[]          = { "monospace:size=10" };
 static int lrpad                    = 2;        /* pixel sum of left and right padding for bar text. ~0 for auto */
-static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -106,14 +105,11 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
    /* type          modifier                      key        function        argument */
-	{ KeyPress,     MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ KeyPress,     MODKEY,                       XK_b,      togglebar,      {0} },
     { KeyPress,     MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
