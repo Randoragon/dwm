@@ -77,17 +77,18 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class         instance       title           tags mask  isfloating  canfocus  isterminal  noswallow  monitor  float x,y,w,h,border        */
-	{ "Gimp",        NULL,          NULL,           0,         1,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
-	{ "St",          NULL,          NULL,           0,         0,          1,        1,          -1,        -1,        -1, -1, -1, -1, -1        },
-	{ NULL,          NULL,          "Event Tester", 0,         1,          1,        0,           1,        -1,        -1, -1, -1, -1, -1        }, /* xev */
-	{ NULL,		     "s_term",		NULL,		    SPTAG(0),  1,		   1,        1,           1,        -1,        -1, -1, -1, -1, -1        },
-	{ NULL,		     "s_music",		NULL,		    SPTAG(1),  1,		   1,        1,           1,        -1,        -1, -1, -1, -1, -1        },
-	{ NULL,		     "s_news",		NULL,		    SPTAG(2),  1,		   1,        1,           1,        -1,        -1, -1, -1, -1, -1        },
-	{ "firefox",     NULL,          NULL,           1 << 0,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
-	{ "Thunderbird", NULL,          NULL,           1 << 1,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
-	{ "discord",     NULL,          NULL,           1 << 2,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
-	{ "GLava",       NULL,          NULL,           0,         1,          0,        0,           1,        -1,         0,  0, -1, -1,  0        },
+	/* class            instance       title           tags mask  isfloating  canfocus  isterminal  noswallow  monitor  float x,y,w,h,border        */
+	{ "Gimp",           NULL,          NULL,           0,         1,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
+	{ "St",             NULL,          NULL,           0,         0,          1,        1,          -1,        -1,        -1, -1, -1, -1, -1        },
+	{ NULL,             NULL,          "Event Tester", 0,         1,          1,        0,           1,        -1,        -1, -1, -1, -1, -1        }, /* xev */
+	{ NULL,		        "s_term",		NULL,		    SPTAG(0),  1,		   1,        1,           1,        -1,        -1, -1, -1, -1, -1        },
+	{ NULL,		        "s_music",		NULL,		    SPTAG(1),  1,		   1,        1,           1,        -1,        -1, -1, -1, -1, -1        },
+	{ NULL,		        "s_news",		NULL,		    SPTAG(2),  1,		   1,        1,           1,        -1,        -1, -1, -1, -1, -1        },
+	{ "firefox",        NULL,          NULL,           1 << 0,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
+	{ "Brave-browser",  NULL,          NULL,           1 << 0,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
+	{ "Thunderbird",    NULL,          NULL,           1 << 1,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
+	{ "discord",        NULL,          NULL,           1 << 2,    0,          1,        0,           0,        -1,        -1, -1, -1, -1, -1        },
+	{ "GLava",          NULL,          NULL,           0,         1,          0,        0,           1,        -1,         0,  0, -1, -1,  0        },
 };
 
 /* layout(s) */
