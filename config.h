@@ -182,10 +182,6 @@ static Key keys[] = {
 	TAGKEYS(                                      XK_7,                             9)
 	TAGKEYS(                                      XK_8,                            10)
 	TAGKEYS(                                      XK_9,                            11)
-    { KeyPress,     MODKEY,                       XK_h,             viewtoleft,     {0} },
-    { KeyPress,     MODKEY,                       XK_l,             viewtoright,    {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_h,             tagtoleft,      {0} },
-    { KeyPress,     MODKEY|ShiftMask,             XK_l,             tagtoright,     {0} },
 	{ KeyPress,     MODKEY,                       XK_q,             killclient,     {0} },
 	{ KeyPress,     MODKEY|ShiftMask,             XK_q,             spawn,          {.v = quitcmd} },
     { KeyPress,     MODKEY,                       XK_bracketright,  incrgaps,       {.i = +4 } },
@@ -196,7 +192,7 @@ static Key keys[] = {
     { KeyPress,     MODKEY|ControlMask,           XK_bracketleft,   incrigaps,      {.i = -4 } },
     { KeyPress,     MODKEY|ShiftMask,             XK_0,             togglegaps,     {0} },
     { KeyPress,     MODKEY|ControlMask,           XK_0,             defaultgaps,    {0} },
-	{ KeyPress,     MODKEY,            			  XK_p,  	 togglescratch,  {.ui = 0 } },
+	{ KeyPress,     MODKEY,            			  XK_l,  	 togglescratch,  {.ui = 0 } },
 	{ KeyPress,     MODKEY,            			  XK_m,	     togglescratch,  {.ui = 1 } },
 	{ KeyPress,     MODKEY,            			  XK_n,	     togglescratch,  {.ui = 2 } },
 };
