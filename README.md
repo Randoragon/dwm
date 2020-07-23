@@ -29,6 +29,7 @@ utilize some bar patches' features.
 - dwmblocks integration - read the [Status Bar Rewrite section](https://github.com/Randoragon/dwm#status-bar-rewrite)
 - color fonts support (will crash if you don't have [libxft-bgra](https://aur.archlinux.org/packages/libxft-bgra) installed!)
 - removed dmenu binding (use an external program like xbindkeys instead)
+- floating windows save their positions (includes scratchpads!)
 
 ## Bar features
 
@@ -76,6 +77,7 @@ so a lot of the code is slightly different from its original source.
 - [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
 - [status2d](https://dwm.suckless.org/patches/status2d/)
+- [save floats](http://dwm.suckless.org/patches/save_floats/)
 
 ## Status Bar Rewrite
 

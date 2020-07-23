@@ -102,6 +102,7 @@ struct Client {
 	char name[256];
 	float mina, maxa;
 	int x, y, w, h;
+	int sfx, sfy, sfw, sfh; /* stored float geometry, used on mode revert */
 	int oldx, oldy, oldw, oldh;
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
@@ -1408,6 +1409,10 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
+	c->sfx = c->x;
+	c->sfy = c->y;
+	c->sfw = c->w;
+	c->sfh = c->h;
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
 	if (!c->isfloating)
@@ -1618,6 +1623,9 @@ moveplace(const Arg *arg)
 	Client *c;
 	int nh, nw, nx, ny;
 	c = selmon->sel;
+    if (!c) {
+        return;
+    }
 	if (selmon->lt[selmon->sellt]->arrange && !c->isfloating)
 		togglefloating(NULL);
 	nw = c->w;
@@ -2276,10 +2284,6 @@ showhide(Client *c)
 	if (!c)
 		return;
 	if (ISVISIBLE(c)) {
-		if ((c->tags & SPTAGMASK) && c->isfloating) {
-			c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
-			c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
-		}
 		/* show clients top down */
 		XMoveWindow(dpy, c->win, c->x, c->y);
 		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
@@ -2390,8 +2394,16 @@ togglefloating(const Arg *arg)
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
 	if (selmon->sel->isfloating)
-		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
-			selmon->sel->w, selmon->sel->h, 0);
+ 		/*restore last known float dimensions*/
+ 		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
+ 		       selmon->sel->sfw, selmon->sel->sfh, False);
+ 	else {
+ 		/*save last known float dimensions*/
+ 		selmon->sel->sfx = selmon->sel->x;
+ 		selmon->sel->sfy = selmon->sel->y;
+ 		selmon->sel->sfw = selmon->sel->w;
+ 		selmon->sel->sfh = selmon->sel->h;
+ 	}
 	arrange(selmon);
 }
 
@@ -2423,14 +2435,20 @@ togglescratch(const Arg *arg)
 	if (found) {
 		unsigned int newtagset = selmon->tagset[selmon->seltags] ^ scratchtag;
 		if (newtagset) {
-			selmon->tagset[selmon->seltags] = newtagset;
+            selmon->tagset[selmon->seltags] = newtagset;
 			focus(NULL);
 			arrange(selmon);
 		}
-		if (ISVISIBLE(c)) {
-			focus(c);
-			restack(selmon);
-		}
+        if (ISVISIBLE(c)) {
+            resize(c, c->sfx, c->sfy, c->sfw, c->sfh, False);
+            focus(c);
+            restack(selmon);
+        } else {
+            c->sfx = c->x;
+            c->sfy = c->y;
+            c->sfw = c->w;
+            c->sfh = c->h;
+        }
 	} else {
 		selmon->tagset[selmon->seltags] |= scratchtag;
 		spawn(&sparg);
