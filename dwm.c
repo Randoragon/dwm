@@ -2370,8 +2370,9 @@ void
 togglebar(const Arg *arg)
 {
 	selmon->showbar = !selmon->showbar;
-    sharedmemory[4] = (selmon->showbar && selmon->showstatus);
-    dwmblocks_send(SIGHUP);
+    sharedmemory[4] = selmon->showbar;
+    if (selmon->showbar)
+        dwmblocks_send(SIGHUP);
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
@@ -2381,7 +2382,7 @@ void
 togglestatus(const Arg *arg)
 {
     selmon->showstatus = !selmon->showstatus;
-    sharedmemory[4] = (selmon->showbar && selmon->showstatus);
+    sharedmemory[5] = selmon->showstatus;
     dwmblocks_send(SIGHUP);
 }
 
@@ -2740,15 +2741,19 @@ updatesizehints(Client *c)
 void
 updatestatus(const Arg *arg)
 {
-    int i;
-    char *sm = sharedmemory;
-    for (i = 5; i < SHM_SIZE && sm[i] != '\0' && sm[i] != '\n'; i++);
-    if (i == SHM_SIZE) {
-        fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SHM_SIZE);
-        i--;
+    if (selmon->showbar) {
+        int i;
+        char *sm = sharedmemory;
+        for (i = 6; i < SHM_SIZE && sm[i] != '\0' && sm[i] != '\n'; i++);
+        if (i == SHM_SIZE) {
+            fprintf(stderr, "dwm: status message exceeds block size %u, truncating", SHM_SIZE);
+            i--;
+        }
+        sm[i] = '\0';
+        strcpy(stext, sm + 6);
+    } else {
+        strcpy(stext, "^f5^^c#FFFFFF^dwmblocks is offline^f5^"); 
     }
-    sm[i] = '\0';
-    strcpy(stext, sm + 5);
 
 	drawbar(selmon);
 }
@@ -3103,10 +3108,11 @@ main(int argc, char *argv[])
     memset(sharedmemory, 0, 4);
 
 
-    /* the fifth byte denotes bar visibility */
+    /* the fifth and sixth bytes respectively denote bar and status visibility */
     sharedmemory[4] = 1;
+    sharedmemory[5] = 1;
 
-    strcpy(sharedmemory + 5, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
+    strcpy(sharedmemory + 6, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
 
     setup();
 
