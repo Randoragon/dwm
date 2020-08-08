@@ -70,7 +70,7 @@ so a lot of the code is slightly different from its original source.
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
 - [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
 - [fsignal](https://dwm.suckless.org/patches/fsignal/)
-- [moveplace](https://dwm.suckless.org/patches/moveplace/)
+- [movethrow](https://dwm.suckless.org/patches/movethrow/)
 - [alpha](https://dwm.suckless.org/patches/alpha/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [bar height](https://dwm.suckless.org/patches/bar_height/)
