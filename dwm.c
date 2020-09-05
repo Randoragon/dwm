@@ -2373,9 +2373,9 @@ togglebar(const Arg *arg)
     sharedmemory[4] = selmon->showbar;
     if (selmon->showbar)
         dwmblocks_send(SIGHUP);
-	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-	arrange(selmon);
+    updatebarpos(selmon);
+    XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+    arrange(selmon);
 }
 
 void
