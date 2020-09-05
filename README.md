@@ -25,7 +25,7 @@ utilize some bar patches' features.
 - Unlimited scratch pads/windows (arbitrary command)
 - Execute arbitrary commands by sending signals
 - "throw" windows against screen borders
-- window rules: canfocus, floatrules
+- floating window rules
 - dwmblocks integration - read the [Status Bar Rewrite section](https://github.com/Randoragon/dwm#status-bar-rewrite)
 - color fonts support (will crash if you don't have [libxft-bgra](https://aur.archlinux.org/packages/libxft-bgra) installed!)
 - removed dmenu binding (use an external program like xbindkeys instead)
@@ -54,7 +54,6 @@ so a lot of the code is slightly different from its original source.
 - [autostart](https://dwm.suckless.org/patches/autostart/)
 - [bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 - [centeredmaster](https://dwm.suckless.org/patches/centeredmaster/)
-- [emptyview](https://dwm.suckless.org/patches/emptyview/)
 - [moveresize](https://dwm.suckless.org/patches/moveresize/)
 - [fibonacci](https://dwm.suckless.org/patches/fibonacci/)
 - [focus adjacent tag](https://dwm.suckless.org/patches/focusadjacenttag/)
@@ -74,7 +73,6 @@ so a lot of the code is slightly different from its original source.
 - [alpha](https://dwm.suckless.org/patches/alpha/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [bar height](https://dwm.suckless.org/patches/bar_height/)
-- [canfocusrule](https://dwm.suckless.org/patches/canfocusrule/)
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
 - [status2d](https://dwm.suckless.org/patches/status2d/)
 - [save floats](http://dwm.suckless.org/patches/save_floats/)
