@@ -88,7 +88,9 @@ static const Rule rules[] = {
 	{ "Brave-browser",  NULL,          NULL,           1 << 0,    0,          0,           0,        -1,        -1, -1, -1, -1, -1        },
 	{ "Thunderbird",    NULL,          NULL,           1 << 1,    0,          0,           0,        -1,        -1, -1, -1, -1, -1        },
 	{ "discord",        NULL,          NULL,           1 << 2,    0,          0,           0,        -1,        -1, -1, -1, -1, -1        },
-	{ "GLava",          NULL,          NULL,           0,         1,          0,           1,        -1,         0,  0, -1, -1,  0        },
+	{ "GLava",          NULL,          NULL,           0,         1,          0,           1,        -1,        -1,  0, -1, -1,  0        },
+	{ "Steam",          "Steam",       NULL,           0,         1,          0,           1,        -1,        -1, -1, -1, -1, -1        },
+	{ "Steam",          "Steam",       "Steam",        0,         0,          0,           1,        -1,        -1, -1, -1, -1, -1        },
 };
 
 /* layout(s) */
