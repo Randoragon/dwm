@@ -91,6 +91,7 @@ static const Rule rules[] = {
 	{ "GLava",          NULL,          NULL,           0,         1,          0,           1,        -1,        -1,  0, -1, -1,  0        },
 	{ "Steam",          "Steam",       NULL,           0,         1,          0,           1,        -1,        -1, -1, -1, -1, -1        },
 	{ "Steam",          "Steam",       "Steam",        0,         0,          0,           1,        -1,        -1, -1, -1, -1, -1        },
+	{ "Florence",       NULL,          NULL,           0,         1,          0,           1,        -1,        -1, -1, -1, -1, -1        },
 };
 
 /* layout(s) */
