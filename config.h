@@ -84,6 +84,7 @@ static const Rule rules[] = {
 	{ NULL,		        "s_music",	   NULL,		   SPTAG(1),  1,		  1,           1,        -1,        -1, -1, -1, -1, -1        },
 	{ NULL,		        "s_news",	   NULL,		   SPTAG(2),  1,		  1,           1,        -1,        -1, -1, -1, -1, -1        },
 	{ NULL,		        "surf-dl",	   NULL,		   0,         1,		  1,           1,        -1,        -1, -1, -1, -1, -1        },
+    { "floatme",        NULL,          NULL,           0,         1,          1,           1,        -1,        -1, -1, -1, -1, -1        },
 	{ "firefox",        NULL,          NULL,           1 << 0,    0,          0,           0,        -1,        -1, -1, -1, -1, -1        },
 	{ "Brave-browser",  NULL,          NULL,           1 << 0,    0,          0,           0,        -1,        -1, -1, -1, -1, -1        },
 	{ "Chromium",       NULL,          NULL,           1 << 0,    0,          0,           0,        -1,        -1, -1, -1, -1, -1        },
