@@ -792,7 +792,7 @@ createmon(void)
 	m->mfact = mfact;
 	m->nmaster = nmaster;
 	m->showbar = showbar;
-	m->showstatus = 1;
+	m->showstatus = 0;
 	m->topbar = topbar;
 	m->gappi = gappi;
 	m->gappo = gappo;
@@ -3105,7 +3105,7 @@ main(int argc, char *argv[])
 
     /* the fifth and sixth bytes respectively denote bar and status visibility */
     sharedmemory[4] = 1;
-    sharedmemory[5] = 1;
+    sharedmemory[5] = 0;
 
     strcpy(sharedmemory + 6, "^f5^^c#FFFFFF^dwmblocks is offline^f5^");
 
