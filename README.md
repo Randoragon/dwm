@@ -76,6 +76,7 @@ so a lot of the code is slightly different from its original source.
 - [floatrules](https://dwm.suckless.org/patches/floatrules/)
 - [status2d](https://dwm.suckless.org/patches/status2d/)
 - [save floats](http://dwm.suckless.org/patches/save_floats/)
+- [attachdirection](http://dwm.suckless.org/patches/attachdirection/)
 
 ## Status Bar Rewrite
 
