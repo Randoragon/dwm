@@ -100,8 +100,6 @@ Maybe someday I will make this into a patch, because it works rather well, is fu
 
 ## Installation
 
-Arch Linux users can install the `dwm-randoragon-git` AUR package.
-
 In order to build dwm you need the Xlib header files.
 
 Edit config.mk to match your local setup (dwm is installed into
