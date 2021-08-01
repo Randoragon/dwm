@@ -1,19 +1,21 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 0;        /* snap pixel */
 static const unsigned int gappi     = 20;       /* inner gap between windows */
 static const unsigned int gappo     = 30;       /* outer gap between windows and screen edge */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 19;       /* 0 means that dwm will calculate bar */
+static const int user_bh            = 20;       /* 0 means that dwm will calculate bar */
 static const int startontag         = 1 << 3;   /* 0 means no tag active on start */
 static const char *fonts[]          = {
-    "Bitstream Vera Sans Mono:size=9:antialias=true",
-    "Font Awesome 5 Free Solid:fontformat=truetype:size=9:antialias=true",
-    "Font Awesome 5 Brands Regular:fontformat=truetype:size=9:antialias=true",
+    "Bitstream Vera Sans Mono:size=10:antialias=true",
+    "Font Awesome 5 Free Solid:fontformat=truetype:size=10:antialias=true",
+    "Font Awesome 5 Brands Regular:fontformat=truetype:size=10:antialias=true",
+    "JoyPixels:size=10:antialias=true",
+    "DejaVu Sans Mono:size=10:antialias=true",
 };
 static int lrpad                    = 6;       /* pixel sum of left and right padding for bar text. ~0 for auto */
 static const char col_gray1[]       = "#050505";
