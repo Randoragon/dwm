@@ -107,6 +107,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_y,      togglescratch,  {.ui = 0 } },
 	{ MODKEY,                       XK_u,      togglescratch,  {.ui = 1 } },
 	{ MODKEY,                       XK_x,      togglescratch,  {.ui = 2 } },
+	{ MODKEY|ShiftMask,             XK_j,      moveresize,     {.v = "0x 25y 0w 0h" } },
+	{ MODKEY|ShiftMask,             XK_k,      moveresize,     {.v = "0x -25y 0w 0h" } },
+	{ MODKEY|ShiftMask,             XK_l,      moveresize,     {.v = "25x 0y 0w 0h" } },
+	{ MODKEY|ShiftMask,             XK_h,      moveresize,     {.v = "-25x 0y 0w 0h" } },
+	{ MODKEY|ControlMask,           XK_j,      moveresize,     {.v = "0x 0y 0w 25h" } },
+	{ MODKEY|ControlMask,           XK_k,      moveresize,     {.v = "0x 0y 0w -25h" } },
+	{ MODKEY|ControlMask,           XK_l,      moveresize,     {.v = "0x 0y 25w 0h" } },
+	{ MODKEY|ControlMask,           XK_h,      moveresize,     {.v = "0x 0y -25w 0h" } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
