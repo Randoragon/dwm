@@ -18,9 +18,24 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"alacritty", "--class", "sp_term,Alacritty", "-T", "scratchpad", NULL };
+const char *spcmd2[] = {"alacritty", "--class", "sp_music,Alacritty", "-T", "sp_music", "-e", "ncmpcpp", NULL };
+const char *spcmd3[] = {"alacritty", "--class", "sp_news,Alacritty", "-T", "sp_news", "-e", "newsraft", NULL };
+const char *spcmd4[] = {"alacritty", "--class", "sp_calc,Alacritty", "-T", "sp_calc", "-e", "qalc", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spcmd1},
+	{"spmusic",     spcmd2},
+	{"spnews",      spcmd3},
+	{"spcalc",      spcmd4},
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -29,6 +44,10 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ NULL,       "spterm",   NULL,       SPTAG(0),     1,           -1 },
+	{ NULL,       "spmusic",  NULL,       SPTAG(1),     1,           -1 },
+	{ NULL,       "spnews",   NULL,       SPTAG(2),     1,           -1 },
+	{ NULL,       "spcalc",   NULL,       SPTAG(3),     1,           -1 },
 };
 
 /* layout(s) */
@@ -84,6 +103,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_y,      togglescratch,  {.ui = 0 } },
+	{ MODKEY,                       XK_u,      togglescratch,  {.ui = 1 } },
+	{ MODKEY,                       XK_x,      togglescratch,  {.ui = 2 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
