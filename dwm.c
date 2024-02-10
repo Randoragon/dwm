@@ -1379,6 +1379,8 @@ movethrow(const Arg *arg)
 	Client *c;
 	int nh, nw, nx, ny;
 	c = selmon->sel;
+	if (!c)
+		return;
 	if (selmon->lt[selmon->sellt]->arrange && !c->isfloating)
 		togglefloating(NULL);
 	nw = c->w;
