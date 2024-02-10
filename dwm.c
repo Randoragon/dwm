@@ -2059,8 +2059,14 @@ togglescratch(const Arg *arg)
 			arrange(selmon);
 		}
 		if (ISVISIBLE(c)) {
+			resize(c, c->sfx, c->sfy, c->sfw, c->sfh, False);
 			focus(c);
 			restack(selmon);
+		} else {
+			c->sfx = c->x;
+			c->sfy = c->y;
+			c->sfw = c->w;
+			c->sfh = c->h;
 		}
 	} else {
 		selmon->tagset[selmon->seltags] |= scratchtag;

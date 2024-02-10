@@ -19,6 +19,8 @@ retain the ability to upgrade to newer versions of dwm.
 - [sticky](https://dwm.suckless.org/patches/sticky/)
 - [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
 - [scratchpads](https://dwm.suckless.org/patches/scratchpads/)
+    - This requires a small modification from the "*save floats*" patch, to make
+      scratchpads save their positions on hide and restore them on unhide.
 - [movethrow](https://dwm.suckless.org/patches/movethrow/)
     - This patch is slightly broken due to my mistake (I contributed it). A few
       constants are not named correctly in `config.def.h`. All of the
