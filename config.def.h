@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Cantarell:size=10:style=Bold", "DejaVu Sans:size=11" };
+static const char *fonts[]          = { "DejaVu Sans:size=10" };
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { "#BBBBBB", "#222222", "#444444" },
