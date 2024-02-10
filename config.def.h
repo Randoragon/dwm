@@ -35,22 +35,26 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class          instance    title           tags mask     isfloating   monitor */
-	{ "floatme",      NULL,       NULL,           0,            1,           -1 },
-	{ "firefox",      NULL,       NULL,           1 << 9,       0,           -1 },
-	{ "Chromium",     NULL,       NULL,           1 << 9,       0,           -1 },
-	{ "Thunderbird",  NULL,       NULL,           1 << 10,      0,           -1 },
-	{ "discord",      NULL,       NULL,           1 << 11,      0,           -1 },
-	{ NULL,           "sp_term",  NULL,           SPTAG(0),     1,           -1 },
-	{ NULL,           "sp_music", NULL,           SPTAG(1),     1,           -1 },
-	{ NULL,           "sp_news",  NULL,           SPTAG(2),     1,           -1 },
-	{ NULL,           "sp_calc",  NULL,           SPTAG(3),     1,           -1 },
-	{ NULL,           NULL,       "Event Tester", 0,            1,           -1 }, /* xev */
-	{ NULL,           NULL,       "surf-dl",      0,            1,           -1 },
-	{ "Steam",        "Steam",    NULL,           0,            1,           -1 },
-	{ "Steam",        "Steam",    "Steam",        0,            0,           -1 },
-	{ "zoom",         "zoom",     "Polls",        0,            1,           -1 },
-	{ "Sxiv",         NULL,       NULL,           0,            1,           -1 },
+	/* class          instance    title              tags mask   isfloating   monitor */
+	{ "floatme",      NULL,       NULL,              0,          1,           -1 },
+	{ "firefox",      NULL,       NULL,              1 << 9,     0,           -1 },
+	{ "Chromium",     NULL,       NULL,              1 << 9,     0,           -1 },
+	{ "thunderbird",  NULL,       NULL,              1 << 10,    0,           -1 },
+	{ "discord",      NULL,       NULL,              1 << 11,    0,           -1 },
+	{ NULL,           "sp_term",  NULL,              SPTAG(0),   1,           -1 },
+	{ NULL,           "sp_music", NULL,              SPTAG(1),   1,           -1 },
+	{ NULL,           "sp_news",  NULL,              SPTAG(2),   1,           -1 },
+	{ NULL,           "sp_calc",  NULL,              SPTAG(3),   1,           -1 },
+
+	{ "firefox",      "Places",   NULL,              0,          1,           -1 },
+	{ "discord",      "discord",  "Discord Updater", 0,          1,           -1 },
+	{ NULL,           NULL,       "Event Tester",    0,          1,           -1 }, /* xev */
+	{ NULL,           NULL,       "surf-dl",         0,          1,           -1 },
+	{ "Gimp",         "gimp",     "GIMP Startup",    0,          1,           -1 },
+	{ "steam",        NULL,       "Special Offers",  0,          1,           -1 },
+	{ "Hydrogen",     NULL,       "Mixer",           0,          1,           -1 },
+	{ "zoom",         "zoom",     "Polls",           0,          1,           -1 },
+	{ "Sxiv",         NULL,       NULL,              0,          1,           -1 },
 };
 
 /* layout(s) */
