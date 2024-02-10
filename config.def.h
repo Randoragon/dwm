@@ -9,7 +9,7 @@ static const char *fonts[]          = { "Cantarell:size=10:style=Bold", "DejaVu 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { "#BBBBBB", "#222222", "#444444" },
-	[SchemeSel]  = { "#EEEEEE", "#441500", "#FF2200" },
+	[SchemeSel]  = { "#EEEEEE", "#643500", "#FF2200" },
 };
 
 typedef struct {
