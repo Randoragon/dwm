@@ -8,8 +8,8 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "DejaVu Sans:size=10" };
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { "#BBBBBB", "#222222", "#444444" },
-	[SchemeSel]  = { "#EEEEEE", "#643500", "#FF2200" },
+	[SchemeNorm] = { "#BBBBBB", "#222222", "#222222" },
+	[SchemeSel]  = { "#EEEEEE", "#444444", "#BBBBBB" },
 };
 
 typedef struct {
