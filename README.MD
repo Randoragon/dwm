@@ -28,6 +28,7 @@ retain the ability to upgrade to newer versions of dwm.
 - [save floats](http://dwm.suckless.org/patches/save_floats/)
 - [attachabove](https://dwm.suckless.org/patches/attachabove/)
 - [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [fix transparent borders](https://github.com/szatanjl/dwm/commit/1529909466206016f2101457bbf37c67195714c8)
 
 ## Installation
 
