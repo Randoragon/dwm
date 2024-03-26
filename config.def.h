@@ -16,10 +16,10 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"alacritty", "--class", "sp_term,Alacritty", "-T", "scratchpad", NULL };
-const char *spcmd2[] = {"alacritty", "--class", "sp_music,Alacritty", "-T", "sp_music", "-e", "ncmpcpp", NULL };
-const char *spcmd3[] = {"alacritty", "--class", "sp_news,Alacritty", "-T", "sp_news", "-e", "newsraft", NULL };
-const char *spcmd4[] = {"alacritty", "--class", "sp_calc,Alacritty", "-T", "sp_calc", "-e", "qalc", NULL };
+const char *spcmd1[] = {"alacritty", "--class", "Alacritty,sp_term", "-T", "scratchpad", NULL };
+const char *spcmd2[] = {"alacritty", "--class", "Alacritty,sp_music", "-T", "sp_music", "-e", "ncmpcpp", NULL };
+const char *spcmd3[] = {"alacritty", "--class", "Alacritty,sp_news", "-T", "sp_news", "-e", "newsraft", NULL };
+const char *spcmd4[] = {"alacritty", "--class", "Alacritty,sp_calc", "-T", "sp_calc", "-e", "qalc", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"scratchpad",   spcmd1},
